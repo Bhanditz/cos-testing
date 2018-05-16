@@ -10,15 +10,14 @@ var time_pause = 1000;
 var download_folder = "downloads/";
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var default_file = "PublicServiceDescriptionRDFXML.xml";
-var enable_screenshot = true;
-var testfield = '@identifier';
+var enable_screenshot = false;
+var testfield = '@ps_identifier';
 
 module.exports = { // addapted from: https://git.io/vodU0
 	'@tags': ['CSPV'],
-	'Public Service Description Creator': function(browser) {
+	'Field appears in Presenter': function(browser) {
 		var editor = browser.page.Editor();
 		var presenter = browser.page.Presenter();
-		var rdfdata = browser.page.RDFData();
 
 		editor.navigate()
 			.waitForElementVisible('body')
@@ -38,6 +37,12 @@ module.exports = { // addapted from: https://git.io/vodU0
 			browser
 				.saveScreenshot(config.imgpath(browser) + 'presenter.png');
 		}
+		
+	},
+	
+
+	'Field appears in RDFData': function(browser) {
+		var rdfdata = browser.page.RDFData();
 
 		rdfdata
 			.click('@tab');
@@ -51,31 +56,47 @@ module.exports = { // addapted from: https://git.io/vodU0
 			.getValue('@textarea', function(result){
 				this.assert.equal(contents.replace(new RegExp( test_upload, 'g' ), test).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			})
+	},
+
+	'Uploading in RDFData': function(browser) {
+		var rdfdata = browser.page.RDFData();
+
+		rdfdata
 			.setValue('@upload', require('path').resolve(testdata_folder + scriptName+'.rdf'));
 
 		browser
 			.pause(time_pause);
+
+		if(enable_screenshot){
+			browser
+				.saveScreenshot(config.imgpath(browser) + 'rdfdata-upload.png');
+		}
 
 		rdfdata
 			.getValue('@textarea', function(result){
 				this.assert.equal(contents.replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			});
 
-		if(enable_screenshot){
-			browser
-				.pause(time_pause)
-				.saveScreenshot(config.imgpath(browser) + 'rdfdata-upload.png');
-		}
+	},
+
+	'Upload appears in Presenter': function(browser) {
+		var presenter = browser.page.Presenter();
 
 		presenter
 			.click('@tab')
-			.assert.containsText(testfield, test_upload);
 
 		if(enable_screenshot){
 			browser
 				.pause(time_pause)
 				.saveScreenshot(config.imgpath(browser) + 'presenter-upload.png');
 		}
+
+		presenter
+			.assert.containsText(testfield, test_upload);
+	},
+	
+	'Upload appears in Editor': function(browser) {
+		var editor = browser.page.Editor();
 
 		editor
 			.click('@tab');
@@ -88,6 +109,10 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor
 			.assert.value(testfield, test_upload);
+	},
+
+	'Download in RDFData': function(browser) {
+		var rdfdata = browser.page.RDFData();
 
 		rdfdata
 			.click('@tab');

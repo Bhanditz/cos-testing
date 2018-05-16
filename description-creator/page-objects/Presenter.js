@@ -3,12 +3,12 @@ module.exports = {
 		return "http://52.50.205.146:8890/rdforms/PSDescriptionCreator.html"; 
 	},
 	elements: {
-		identifier: {
-			selector: '//div[text()="Identifier"][1]/../div[2]/div[1]/div[1]',
+		ps_identifier: {
+			selector: '(//div[text()="Identifier"])[1]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
 		},
-		name: {
-			selector: '//div[text()="Name"][1]/../div[2]/div[1]/div[1]',
+		ps_name: {
+			selector: '(//div[text()="Name"])[1]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
 		},
 		tab: {

@@ -12,12 +12,12 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
   "selenium": {
     "start_process": true,
     "server_path": seleniumServer.path,
-    "log_path": "",
+    "log_path": "./log",
     "host": "127.0.0.1",
     "port": 4444,
     "cli_args": {
       "webdriver.chrome.driver" : "",
-	  "webdriver.gecko.driver" : "./geckodriver.exe",
+	  "webdriver.gecko.driver" : "./lib/drivers/geckodriver.exe",
 	  "webdriver.firefox.profile" : "nightwatch"
     }
   },
