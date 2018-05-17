@@ -17,7 +17,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     "port": 4444,
     "cli_args": {
       "webdriver.chrome.driver" : "",
-	  "webdriver.gecko.driver" : "./lib/drivers/geckodriver.exe",
+	  "webdriver.gecko.driver" : "./node_modules/geckodriver/geckodriver.exe",
 	  "webdriver.firefox.profile" : "nightwatch"
     }
   },
