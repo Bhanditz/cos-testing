@@ -1,4 +1,5 @@
 var config = require('../../nightwatch.conf.js');
+var languages = require('../../page-objects/Languages.json').languages;
 var fs = require('fs');
 
 var path = require('path');
@@ -11,7 +12,20 @@ var download_folder = "downloads/";
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var default_file = "PublicServiceDescriptionRDFXML.xml";
 var enable_screenshot = false;
-var testfield = '@ps_identifier';
+var testfield = '@ps_description';
+var testfield_lang = '@ps_description_lang';
+
+//var languages = lang.find(o => o.id === 'LOM-Language').content[0].choices;
+var language = languages[Math.floor(Math.random() * languages.length)];
+
+if (language.label.en == "") {
+	language = languages.find(o => o.label.en === 'English');
+}
+var lang_label = language.label.en;
+var lang_value = language.value;
+var lang_string = 'xml:lang="' + lang_value + '"';
+
+console.log(lang_label + " **** " + lang_value);
 
 module.exports = { // addapted from: https://git.io/vodU0
 	'@tags': ['CSPV'],
@@ -22,6 +36,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		editor.navigate()
 			.waitForElementVisible('body')
 			.setValue(testfield, test)
+			.setValue(testfield_lang, lang_label)
 			.click('@tab');
 
 		if(enable_screenshot){
@@ -38,7 +53,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test);
+			.assert.containsText(testfield, test)
+			.assert.containsText(testfield_lang, lang_value);
 
 	},
 	
@@ -56,7 +72,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.getValue('@textarea', function(result){
-				this.assert.equal(contents.replace(new RegExp( test_upload, 'g' ), test).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
+				this.assert.equal(contents.replace(new RegExp( test_upload, 'g' ), test).replace('xml:lang="en"', lang_string).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			})
 	},
 
@@ -94,7 +110,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test_upload);
+			.assert.containsText(testfield, test_upload)
+			.assert.containsText(testfield_lang, languages.find(o => o.label.en === 'English').value);
 	},
 	
 	'Upload appears in Editor': function(browser) {
@@ -110,7 +127,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, test_upload);
+			.assert.value(testfield, test_upload)
+			.assert.value(testfield_lang, languages.find(o => o.label.en === 'English').label.en);
 	},
 
 	'Download in RDFData': function(browser) {

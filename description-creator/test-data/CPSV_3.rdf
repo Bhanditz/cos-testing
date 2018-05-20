@@ -3,6 +3,6 @@
 	xmlns:dcterms="http://purl.org/dc/terms/">
   <rdf:Description rdf:nodeID="PS_0">
     <rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
-    <dcterms:title xml:lang="en">test2</dcterms:title>
+    <dcterms:description xml:lang="en">test2</dcterms:description>
   </rdf:Description>
 </rdf:RDF>

@@ -1,17 +1,27 @@
 var config = require('../../nightwatch.conf.js');
 var fs = require('fs');
-
+var codelist = require('../../page-objects/CPSVtemplateWithCodelists.json');
 var path = require('path');
 var scriptName = path.basename(__filename, '.js');
 var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
-var test = "test";
-var test_upload = "test2";
 var time_pause = 1000;
 var download_folder = "downloads/";
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var default_file = "PublicServiceDescriptionRDFXML.xml";
-var enable_screenshot = false;
-var testfield = '@ps_identifier';
+var enable_screenshot = true;
+var testfield = '@ps_sector';
+
+var sectors = codelist.templates[0].content[4].choices;
+//var uri =languages.find(o => o.label === 'English').value;
+var sector = sectors[Math.floor(Math.random() * sectors.length)];
+var sector_label = sector.label;
+var sector_value = sector.value;
+
+var first_sector = sectors.find(o => o.label === 'A - Agriculture, forestry and fishing');
+var first_sector_label = first_sector.label;
+var first_sector_value = first_sector.value;
+
+console.log(sector_label + " **** " + sector_value);
 
 module.exports = { // addapted from: https://git.io/vodU0
 	'@tags': ['CSPV'],
@@ -21,7 +31,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.setValue(testfield, test)
+			.setValue(testfield, sector_label)
 			.click('@tab');
 
 		if(enable_screenshot){
@@ -38,10 +48,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test);
-
+			.assert.containsText(testfield, sector_label);
 	},
-	
 
 	'Field appears in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
@@ -56,10 +64,10 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.getValue('@textarea', function(result){
-				this.assert.equal(contents.replace(new RegExp( test_upload, 'g' ), test).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
+				this.assert.equal(contents.replace(new RegExp( first_sector_value, 'g' ), sector_value).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			})
 	},
-
+	
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
@@ -78,7 +86,6 @@ module.exports = { // addapted from: https://git.io/vodU0
 			.getValue('@textarea', function(result){
 				this.assert.equal(contents.replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			});
-
 	},
 
 	'Upload appears in Presenter': function(browser) {
@@ -94,9 +101,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test_upload);
-	},
-	
+			.assert.containsText(testfield, first_sector_label);
+
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
@@ -110,7 +116,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, test_upload);
+			.assert.value(testfield, first_sector_label);
 	},
 
 	'Download in RDFData': function(browser) {

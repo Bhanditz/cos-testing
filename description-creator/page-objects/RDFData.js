@@ -3,6 +3,9 @@ module.exports = {
 		return "http://52.50.205.146:8890/rdforms/PSDescriptionCreator.html"; 
 	},
 	elements: {
+		tab: {
+			selector: '#dijit_layout_TabContainer_0_tablist_dijit__WidgetsInTemplateMixin_0'
+		},
 		textarea: {
 			selector: '#dijit_form_SimpleTextarea_1'
 		},
@@ -12,9 +15,6 @@ module.exports = {
 		download: {
 			selector: '//button[text()="download"]',
 			locateStrategy: 'xpath'
-		},
-		tab: {
-			selector: '#dijit_layout_TabContainer_0_tablist_dijit__WidgetsInTemplateMixin_0'
 		}
 	}
 };
