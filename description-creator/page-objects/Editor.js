@@ -38,6 +38,42 @@ module.exports = {
 			selector: '(//span[text()="Sector"])[1]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
+		ps_type: {
+			selector: '(//span[text()="Type"])[1]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ps_language: {
+			selector: '(//span[text()="Language"])[1]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ps_status: {
+			selector: '(//span[text()="Status"])[1]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ps_spatial: {
+			selector: '(//span[text()="Spatial"])[1]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ps_pt_years: {
+			selector: '(//span[text()="ProcessingTime"])[1]/../../div[2]/div[1]/div[2]/span[text()="Years"]/following-sibling::div[1]/div[3]/input',
+			locateStrategy: 'xpath'
+		},
+		ps_pt_months: {
+			selector: '(//span[text()="ProcessingTime"])[1]/../../div[2]/div[1]/div[2]/span[text()="Months"]/following-sibling::div[1]/div[3]/input',
+			locateStrategy: 'xpath'
+		},
+		ps_pt_days: {
+			selector: '(//span[text()="ProcessingTime"])[1]/../../div[2]/div[1]/div[2]/span[text()="Days"]/following-sibling::div[1]/div[3]/input',
+			locateStrategy: 'xpath'
+		},
+		ps_pt_hours: {
+			selector: '(//span[text()="ProcessingTime"])[1]/../../div[2]/div[1]/div[2]/span[text()="Hours"]/following-sibling::div[1]/div[3]/input',
+			locateStrategy: 'xpath'
+		},
+		ps_pt_minutes: {
+			selector: '(//span[text()="ProcessingTime"])[1]/../../div[2]/div[1]/div[2]/span[text()="Minutes"]/following-sibling::div[1]/div[3]/input',
+			locateStrategy: 'xpath'
+		},
 		ca_spatial: {
 			selector: '(//span[text()="HasCompetentAuthority"])[1]/../../div[2]/div[1]/div[3]/div[1]/span[text()="Spatial"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'

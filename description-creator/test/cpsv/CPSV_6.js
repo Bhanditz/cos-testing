@@ -9,19 +9,24 @@ var download_folder = "downloads/";
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var default_file = "PublicServiceDescriptionRDFXML.xml";
 var enable_screenshot = true;
-var testfield = '@ps_sector';
+var testfield = '@ps_type';
 
-var sectors = codelist.templates[0].content[4].choices;
+var types = codelist.templates[0].content[5].choices;
 //var uri =languages.find(o => o.label === 'English').value;
-var sector = sectors[Math.floor(Math.random() * sectors.length)];
-var sector_label = sector.label;
-var sector_value = sector.value;
+var type = types[Math.floor(Math.random() * types.length)];
+var type_label = type.label;
+var type_value = type.value;
 
-var first_sector = sectors.find(o => o.label === 'A - Agriculture, forestry and fishing');
-var first_sector_label = first_sector.label;
-var first_sector_value = first_sector.value;
+var first_type = types.find(o => o.label === '01 - General public services');
+var first_type_label = first_type.label;
+var first_type_value = first_type.value;
 
-console.log(sector_label + " **** " + sector_value);
+console.log(type_label + " **** " + type_value);
+console.log(first_type_label + " **** " + first_type_value);
+
+escapeSpecialChars = function(string) {
+  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+};
 
 module.exports = { // addapted from: https://git.io/vodU0
 	'@tags': ['CSPV'],
@@ -31,7 +36,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.setValue(testfield, sector_label)
+			.setValue(testfield, type_label)
 			.click('@tab');
 
 		if(enable_screenshot){
@@ -48,7 +53,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, sector_label);
+			.assert.containsText(testfield, type_label);
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -64,7 +69,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.getValue('@textarea', function(result){
-				this.assert.equal(contents.replace(new RegExp( first_sector_value, 'g' ), sector_value).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
+				this.assert.equal(contents.replace(first_type_value, type_value).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			})
 	},
 	
@@ -101,7 +106,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, first_sector_label);
+			.assert.containsText(testfield, first_type_label);
 	},
 
 	'Upload appears in Editor': function(browser) {
@@ -117,7 +122,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, first_sector_label);
+			.assert.value(testfield, first_type_label);
 	},
 
 	'Download in RDFData': function(browser) {

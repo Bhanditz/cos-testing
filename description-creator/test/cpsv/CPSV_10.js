@@ -9,19 +9,26 @@ var download_folder = "downloads/";
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var default_file = "PublicServiceDescriptionRDFXML.xml";
 var enable_screenshot = true;
-var testfield = '@ps_sector';
+var ps_pt_years = '@ps_pt_years';
+var ps_pt_months = '@ps_pt_months';
+var ps_pt_days = '@ps_pt_days';
+var ps_pt_hours = '@ps_pt_hours';
+var ps_pt_minutes = '@ps_pt_minutes';
+var ps_pt = '@ps_pt';
 
-var sectors = codelist.templates[0].content[4].choices;
-//var uri =languages.find(o => o.label === 'English').value;
-var sector = sectors[Math.floor(Math.random() * sectors.length)];
-var sector_label = sector.label;
-var sector_value = sector.value;
+var years = Math.floor((Math.random() * 100) + 1);
+var months = Math.floor((Math.random() * 12) + 1);
+var days = Math.floor((Math.random() * 31) + 1);
+var hours = Math.floor((Math.random() * 24) + 1);
+var minutes = Math.floor((Math.random() * 60) + 1);
+var processingtime = "P" + years + "Y" + months + "M" + days + "D" + "T" + hours + "H" + minutes + "M";
 
-var first_sector = sectors.find(o => o.label === 'A - Agriculture, forestry and fishing');
-var first_sector_label = first_sector.label;
-var first_sector_value = first_sector.value;
-
-console.log(sector_label + " **** " + sector_value);
+var first_years = "1";
+var first_months = "1";
+var first_days = "1";
+var first_hours = "1";
+var first_minutes = "1";
+var firstprocessingtime = "P" + first_years + "Y" + first_months + "M" + first_days + "D" + "T" + first_hours + "H" + first_minutes + "M";
 
 module.exports = { // addapted from: https://git.io/vodU0
 	'@tags': ['CSPV'],
@@ -31,7 +38,11 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.setValue(testfield, sector_label)
+			.setValue(ps_pt_years, years)
+			.setValue(ps_pt_months, months)
+			.setValue(ps_pt_days, days)
+			.setValue(ps_pt_hours, hours)
+			.setValue(ps_pt_minutes, minutes)
 			.click('@tab');
 
 		if(enable_screenshot){
@@ -48,7 +59,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, sector_label);
+			.assert.containsText(ps_pt, processingtime);
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -64,7 +75,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.getValue('@textarea', function(result){
-				this.assert.equal(contents.replace(new RegExp( first_sector_value, 'g' ), sector_value).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
+				this.assert.equal(contents.replace(firstprocessingtime, processingtime).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			})
 	},
 	
@@ -101,7 +112,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, first_sector_label);
+			.assert.containsText(ps_pt, firstprocessingtime);
 	},
 
 	'Upload appears in Editor': function(browser) {
@@ -117,7 +128,11 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, first_sector_label);
+			.assert.value(ps_pt_years, first_years)
+			.assert.value(ps_pt_months, first_months)
+			.assert.value(ps_pt_days, first_days)
+			.assert.value(ps_pt_hours, first_hours)
+			.assert.value(ps_pt_minutes, first_minutes);
 	},
 
 	'Download in RDFData': function(browser) {

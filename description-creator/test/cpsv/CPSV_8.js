@@ -9,19 +9,23 @@ var download_folder = "downloads/";
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var default_file = "PublicServiceDescriptionRDFXML.xml";
 var enable_screenshot = true;
-var testfield = '@ps_sector';
+var testfield = '@ps_status';
 
-var sectors = codelist.templates[0].content[4].choices;
-//var uri =languages.find(o => o.label === 'English').value;
-var sector = sectors[Math.floor(Math.random() * sectors.length)];
-var sector_label = sector.label;
-var sector_value = sector.value;
+var statuses = codelist.templates[0].content[7].choices;
+var status = statuses[Math.floor(Math.random() * statuses.length)];
+var status_label = status.label;
+var status_value = status.value;
 
-var first_sector = sectors.find(o => o.label === 'A - Agriculture, forestry and fishing');
-var first_sector_label = first_sector.label;
-var first_sector_value = first_sector.value;
+var first_status = statuses.find(o => o.label === 'Completed');
+var first_status_label = first_status.label;
+var first_status_value = first_status.value;
 
-console.log(sector_label + " **** " + sector_value);
+console.log(status_label + " **** " + status_value);
+console.log(first_status_label + " **** " + first_status_value);
+
+escapeSpecialChars = function(string) {
+  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+};
 
 module.exports = { // addapted from: https://git.io/vodU0
 	'@tags': ['CSPV'],
@@ -31,7 +35,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.setValue(testfield, sector_label)
+			.setValue(testfield, status_label)
 			.click('@tab');
 
 		if(enable_screenshot){
@@ -48,7 +52,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, sector_label);
+			.assert.containsText(testfield, status_label);
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -64,7 +68,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.getValue('@textarea', function(result){
-				this.assert.equal(contents.replace(new RegExp( first_sector_value, 'g' ), sector_value).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
+				this.assert.equal(contents.replace(first_status_value, status_value).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
 			})
 	},
 	
@@ -101,7 +105,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, first_sector_label);
+			.assert.containsText(testfield, first_status_label);
 	},
 
 	'Upload appears in Editor': function(browser) {
@@ -117,7 +121,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, first_sector_label);
+			.assert.value(testfield, first_status_label);
 	},
 
 	'Download in RDFData': function(browser) {

@@ -38,6 +38,26 @@ module.exports = {
 			selector: '(//div[text()="Sector"])[1]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
 		},
+		ps_type: {
+			selector: '(//div[text()="Type"])[1]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		ps_language: {
+			selector: '(//div[text()="Language"])[1]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		ps_status: {
+			selector: '(//div[text()="Status"])[1]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		ps_spatial: {
+			selector: '(//div[text()="Spatial"])[1]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		ps_pt: {
+			selector: '(//div[text()="ProcessingTime"])[1]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
 		ca_spatial: {
 			selector: '(//div[text()="HasCompetentAuthority"])[1]/../div[2]/div[1]/div[1]/div[text()="Spatial"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
