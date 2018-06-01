@@ -64,7 +64,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.getValue('@textarea', function(result){
-				this.assert.equal(contents.replace(new RegExp( first_sector_value, 'g' ), sector_value).replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
+				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(new RegExp( first_sector_value, 'g' ), sector_value).replace(/[\n\r]+/g, '') );
 			})
 	},
 	
@@ -84,7 +84,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.getValue('@textarea', function(result){
-				this.assert.equal(contents.replace(/[\n\r]+/g, ''), result.value.replace(/[\n\r]+/g, ''));
+				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(/[\n\r]+/g, '') );
 			});
 	},
 
@@ -145,7 +145,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 				});
 				var download = fs.readFileSync(download_folder + scriptName+'.rdf', { 'encoding': 'utf8'});
 				rdfdata.getValue('@textarea', function(resultarea){
-					this.assert.equal(download.replace(/[\n\r]+/g, ''), resultarea.value.replace(/[\n\r]+/g, ''));
+					this.assert.equal( resultarea.value.replace(/[\n\r]+/g, ''), download.replace(/[\n\r]+/g, '') );
 				});
 			});
 
