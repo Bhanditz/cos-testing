@@ -1,5 +1,4 @@
 var config = require('../../nightwatch.conf.js');
-var util = require('../../page-objects/utils/util.js');
 var fs = require('fs');
 var path = require('path');
 
@@ -7,29 +6,27 @@ var scriptName = path.basename(__filename, '.js');
 var testdata_filename = scriptName + '.rdf';
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var testdata_file = path.resolve(testdata_folder + testdata_filename);
-var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'utf8'});
+var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
 var download_folder = "downloads/";
 
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var pt = util.getRandomProcessingTime();
-var pt_text = pt.text();
+var test = "test";
+var test_upload = "test2";
 
-var def_pt = util.getDefaultProcessingTime();
-var def_pt_text = def_pt.text();
-
-console.log(pt_text);
-
-module.exports = { // addapted from: https://git.io/vodU0
+module.exports = {
 	'@tags': ['CSPV'],
 	'Field appears in Presenter': function(browser) {
 		var editor = browser.page.Editor();
 		var presenter = browser.page.Presenter();
 
 		editor.navigate()
-			.waitForElementVisible('body')
-			.set_ps_pt(pt)
+			.waitForElementVisible('body');
+
+		editor
+			.be_expand()
+			.set_be_identifier(test)
 			.select();
 
 		if(enable_screenshot){
@@ -46,7 +43,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert_ps_pt(pt_text);
+			.assert_be_identifier(test);
+
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -64,7 +62,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 			.pause(time_pause);
 
 		rdfdata
-			.verify_textarea(contents.replace(def_pt_text, pt_text));
+			.verify_textarea(contents.replace(new RegExp( test_upload, 'g' ), test));
 	},
 
 	'Uploading in RDFData': function(browser) {
@@ -83,6 +81,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.verify_textarea(contents);
+
 	},
 
 	'Upload appears in Presenter': function(browser) {
@@ -98,9 +97,9 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert_ps_pt(def_pt_text);
+			.assert_be_identifier(test_upload);
 	},
-
+	
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
@@ -114,7 +113,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert_ps_pt(def_pt);
+			.assert_be_identifier(test_upload);
 	},
 
 	'Download in RDFData': function(browser) {

@@ -1,33 +1,34 @@
 var config = require('../../nightwatch.conf.js');
-var languages = require('../../page-objects/Languages.json').languages;
+var util = require('../../page-objects/utils/util.js');
 var fs = require('fs');
-
 var path = require('path');
+
 var scriptName = path.basename(__filename, '.js');
-var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
+var testdata_filename = scriptName + '.rdf';
+var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
+var testdata_file = path.resolve(testdata_folder + testdata_filename);
+var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'utf8'});
+var download_folder = "downloads/";
+
+var time_pause = 1000;
+var enable_screenshot = false;
+
 var test = "test";
 var test_upload = "test2";
-var time_pause = 1000;
-var download_folder = "downloads/";
-var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
-var default_file = "PublicServiceDescriptionRDFXML.xml";
-var enable_screenshot = false;
-var testfield = '@ps_name';
-var testfield_lang = '@ps_name_lang';
 
-//var languages = lang.find(o => o.id === 'LOM-Language').content[0].choices;
-var language = languages[Math.floor(Math.random() * languages.length)];
-
-if (language.label.en == "") {
-	language = languages.find(o => o.label.en === 'English');
-}
+var language = util.getRandomLanguageAttribute();
 var lang_label = language.label.en;
 var lang_value = language.value;
 var lang_string = 'xml:lang="' + lang_value + '"';
 
+var def_language = util.getDefaultLanguageAttribute();
+var def_lang_label = def_language.label.en;
+var def_lang_value = def_language.value;
+var def_lang_string = 'xml:lang="' + def_lang_value + '"';
+
 console.log(lang_label + " **** " + lang_value);
 
-module.exports = { // addapted from: https://git.io/vodU0
+module.exports = {
 	'@tags': ['CSPV'],
 	'Field appears in Presenter': function(browser) {
 		var editor = browser.page.Editor();
@@ -35,9 +36,9 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.setValue(testfield, test)
-			.setValue(testfield_lang, lang_label)
-			.click('@tab');
+			.set_ps_name(test)
+			.set_ps_name_lang(lang_label)
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -45,7 +46,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -53,11 +54,9 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test)
-			.assert.containsText(testfield_lang, lang_value);
+			.assert_ps_name(test)
+			.assert_ps_name_lang(lang_value);
 
-		
-		
 	},
 	
 
@@ -65,24 +64,25 @@ module.exports = { // addapted from: https://git.io/vodU0
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
 				.saveScreenshot(config.imgpath(browser) + 'rdfdata.png');
 		}
 
+		browser
+			.pause(time_pause);
+
 		rdfdata
-			.getValue('@textarea', function(result){
-				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(new RegExp( test_upload, 'g' ), test).replace('xml:lang="en"', lang_string).replace(/[\n\r]+/g, '') );
-			})
+			.verify_textarea(contents.replace(new RegExp( test_upload, 'g' ), test).replace(def_lang_string , lang_string));
 	},
 
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.setValue('@upload', require('path').resolve(testdata_folder + scriptName+'.rdf'));
+			.upload(testdata_file);
 
 		browser
 			.pause(time_pause);
@@ -93,9 +93,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		rdfdata
-			.getValue('@textarea', function(result){
-				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(/[\n\r]+/g, '') );
-			});
+			.verify_textarea(contents);
 
 	},
 
@@ -103,7 +101,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		var presenter = browser.page.Presenter();
 
 		presenter
-			.click('@tab')
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -112,15 +110,15 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test_upload)
-			.assert.containsText(testfield_lang, languages.find(o => o.label.en === 'English').value);
+			.assert_ps_name(test_upload)
+			.assert_ps_name_lang(def_lang_value);
 	},
 	
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
 		editor
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -129,15 +127,15 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, test_upload)
-			.assert.value(testfield_lang, languages.find(o => o.label.en === 'English').label.en);;
+			.assert_ps_name(test_upload)
+			.assert_ps_name_lang(def_lang_label);
 	},
 
 	'Download in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -146,21 +144,13 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		rdfdata
-			.click('@download');
+			.download();
 
 		browser
-			.pause(time_pause);
+			.pause(time_pause*4);
 
 		rdfdata
-			.getValue('@textarea', function(resultarea){
-				var rename = fs.renameSync(download_folder + default_file, download_folder + scriptName + '.rdf', function(err) {
-					if ( err ) console.log('ERROR: ' + err);
-				});
-				var download = fs.readFileSync(download_folder + scriptName+'.rdf', { 'encoding': 'utf8'});
-				rdfdata.getValue('@textarea', function(resultarea){
-					this.assert.equal( resultarea.value.replace(/[\n\r]+/g, ''), download.replace(/[\n\r]+/g, '') );
-				});
-			});
+			.verify_download(download_folder, testdata_filename);
 
 		if(enable_screenshot){
 			browser

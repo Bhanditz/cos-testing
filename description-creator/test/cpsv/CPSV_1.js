@@ -1,19 +1,21 @@
 var config = require('../../nightwatch.conf.js');
 var fs = require('fs');
-
 var path = require('path');
+
 var scriptName = path.basename(__filename, '.js');
+var testdata_filename = scriptName + '.rdf';
+var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
+var testdata_file = path.resolve(testdata_folder + testdata_filename);
 var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
+var download_folder = "downloads/";
+
+var time_pause = 1000;
+var enable_screenshot = false;
+
 var test = "test";
 var test_upload = "test2";
-var time_pause = 1000;
-var download_folder = "downloads/";
-var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
-var default_file = "PublicServiceDescriptionRDFXML.xml";
-var enable_screenshot = true;
-var testfield = '@ps_identifier';
 
-module.exports = { // addapted from: https://git.io/vodU0
+module.exports = {
 	'@tags': ['CSPV'],
 	'Field appears in Presenter': function(browser) {
 		var editor = browser.page.Editor();
@@ -21,8 +23,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.setValue(testfield, test)
-			.click('@tab');
+			.set_ps_identifier(test)
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -30,7 +32,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -38,7 +40,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test);
+			.assert_ps_identifier(test);
 
 	},
 	
@@ -47,7 +49,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -58,16 +60,14 @@ module.exports = { // addapted from: https://git.io/vodU0
 			.pause(time_pause);
 
 		rdfdata
-			.getValue('@textarea', function(result){
-				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(new RegExp( test_upload, 'g' ), test).replace(/[\n\r]+/g, '') );
-			})
+			.verify_textarea(contents.replace(new RegExp( test_upload, 'g' ), test));
 	},
 
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.setValue('@upload', require('path').resolve(testdata_folder + scriptName+'.rdf'));
+			.upload(testdata_file);
 
 		browser
 			.pause(time_pause);
@@ -78,9 +78,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		rdfdata
-			.getValue('@textarea', function(result){
-				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(/[\n\r]+/g, '') );
-			});
+			.verify_textarea(contents);
 
 	},
 
@@ -88,7 +86,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		var presenter = browser.page.Presenter();
 
 		presenter
-			.click('@tab')
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -97,14 +95,14 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, test_upload);
+			.assert_ps_identifier(test_upload);
 	},
 	
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
 		editor
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -113,14 +111,14 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, test_upload);
+			.assert_ps_identifier(test_upload);
 	},
 
 	'Download in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -129,21 +127,13 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		rdfdata
-			.click('@download');
+			.download();
 
 		browser
-			.pause(time_pause);
+			.pause(time_pause*4);
 
 		rdfdata
-			.getValue('@textarea', function(resultarea){
-				var rename = fs.renameSync(download_folder + default_file, download_folder + scriptName + '.rdf', function(err) {
-					if ( err ) console.log('ERROR: ' + err);
-				});
-				var download = fs.readFileSync(download_folder + scriptName+'.rdf', { 'encoding': 'utf8'});
-				rdfdata.getValue('@textarea', function(resultarea){
-					this.assert.equal( resultarea.value.replace(/[\n\r]+/g, ''), download.replace(/[\n\r]+/g, '') );
-				});
-			});
+			.verify_download(download_folder, testdata_filename);
 
 		if(enable_screenshot){
 			browser

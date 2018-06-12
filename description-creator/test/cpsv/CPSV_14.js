@@ -13,15 +13,24 @@ var download_folder = "downloads/";
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var pt = util.getRandomProcessingTime();
-var pt_text = pt.text();
+var nodeid = "testca";
+var entityid = nodeid;
+var test = "test";
+var test_upload = "test2";
 
-var def_pt = util.getDefaultProcessingTime();
-var def_pt_text = def_pt.text();
+var language = util.getRandomLanguageAttribute();
+var lang_label = language.label.en;
+var lang_value = language.value;
+var lang_string = 'xml:lang="' + lang_value + '"';
 
-console.log(pt_text);
+var def_language = util.getDefaultLanguageAttribute();
+var def_lang_label = def_language.label.en;
+var def_lang_value = def_language.value;
+var def_lang_string = 'xml:lang="' + def_lang_value + '"';
 
-module.exports = { // addapted from: https://git.io/vodU0
+console.log(lang_label + " **** " + lang_value);
+
+module.exports = {
 	'@tags': ['CSPV'],
 	'Field appears in Presenter': function(browser) {
 		var editor = browser.page.Editor();
@@ -29,7 +38,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.set_ps_pt(pt)
+			.set_ca_preferredlabel(test)
+			.set_ca_preferredlabel_lang(lang_label)
 			.select();
 
 		if(enable_screenshot){
@@ -46,7 +56,9 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert_ps_pt(pt_text);
+			.assert_ca_preferredlabel(test)
+			.assert_ca_preferredlabel_lang(lang_value);
+
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -64,7 +76,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 			.pause(time_pause);
 
 		rdfdata
-			.verify_textarea(contents.replace(def_pt_text, pt_text));
+			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test).replace(def_lang_string , lang_string), entityid, nodeid);
 	},
 
 	'Uploading in RDFData': function(browser) {
@@ -83,6 +95,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		rdfdata
 			.verify_textarea(contents);
+
 	},
 
 	'Upload appears in Presenter': function(browser) {
@@ -98,9 +111,10 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert_ps_pt(def_pt_text);
+			.assert_ca_preferredlabel(test_upload)
+			.assert_ca_preferredlabel_lang(def_lang_value);
 	},
-
+	
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
@@ -114,7 +128,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert_ps_pt(def_pt);
+			.assert_ca_preferredlabel(test_upload)
+			.assert_ca_preferredlabel_lang(def_lang_label);
 	},
 
 	'Download in RDFData': function(browser) {

@@ -1,0 +1,6 @@
+{ "entities":
+	[
+		{"value": "ca", "label": "hasCompetentAuthority"},
+		{"value": "be", "label": "isGroupedBy"}
+	]
+}

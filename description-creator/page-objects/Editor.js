@@ -2,6 +2,9 @@ module.exports = {
 	url: function() { 
 		return "http://52.50.205.146:8890/rdforms/PSDescriptionCreator.html"; 
 	},
+	getElementByXpath: function(path) {
+			return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+	},
 	elements: {
 		tab: {
 			selector: '#dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_0'
@@ -36,6 +39,10 @@ module.exports = {
 		},
 		ps_sector: {
 			selector: '(//span[text()="Sector"])[1]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ps_sector2: {
+			selector: '(//span[text()="Sector"])[1]/../../div[2]/div[2]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
 		ps_type: {
@@ -74,9 +81,263 @@ module.exports = {
 			selector: '(//span[text()="ProcessingTime"])[1]/../../div[2]/div[1]/div[2]/span[text()="Minutes"]/following-sibling::div[1]/div[3]/input',
 			locateStrategy: 'xpath'
 		},
+		ps_requires: {
+			selector: '(//span[text()="Requires"])[1]/../../div[2]/div[1]/div[2]/div[1]/input',
+			locateStrategy: 'xpath'
+		},
+		ps_related: {
+			selector: '(//span[text()="Related"])[1]/../../div[2]/div[1]/div[2]/div[1]/input',
+			locateStrategy: 'xpath'
+		},
+		ca_identifier: {
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ca_preferredlabel: {
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "PreferredLabel"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ca_preferredlabel_lang: {
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "PreferredLabel"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
 		ca_spatial: {
 			selector: '(//span[text()="HasCompetentAuthority"])[1]/../../div[2]/div[1]/div[3]/div[1]/span[text()="Spatial"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		sector_click: {
+			selector: '//div[1]/span[1][text() = "Sector"]/../span[2]',
+			locateStrategy: 'xpath'
+		},			
+		be_click: {
+			selector: '(//span[text() = "IsGroupedBy: BusinessEvent"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		be_identifier: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		be_name: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		be_name_lang: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		be_description: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		be_description_lang: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
-	}
+	},
+	
+	commands: [{
+		select() {
+			return this.click('@tab');
+		},
+		be_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.be_click.selector]);
+			this.assert.visible('@be_click');
+			this.click('@be_click');
+			return this;
+		},
+		set_ps_identifier(value) {
+			return this.setValue('@ps_identifier', value);
+		},
+		assert_ps_identifier(value){
+			return this.assert.value('@ps_identifier', value);
+		},
+		set_ps_name(value) {
+			return this.setValue('@ps_name', value);
+		},
+		assert_ps_name(value){
+			return this.assert.value('@ps_name', value);
+		},
+		set_ps_name_lang(value) {
+			return this.setValue('@ps_name_lang', value);
+		},
+		assert_ps_name_lang(value){
+			return this.assert.value('@ps_name_lang', value);
+		},
+		set_ps_description(value) {
+			return this.setValue('@ps_description', value);
+		},
+		assert_ps_description(value){
+			return this.assert.value('@ps_description', value);
+		},
+		set_ps_description_lang(value) {
+			return this.setValue('@ps_description_lang', value);
+		},
+		assert_ps_description_lang(value){
+			return this.assert.value('@ps_description_lang', value);
+		},
+		set_ps_keyword(value) {
+			return this.setValue('@ps_keyword', value);
+		},
+		assert_ps_keyword(value){
+			return this.assert.value('@ps_keyword', value);
+		},
+		set_ps_keyword_lang(value) {
+			return this.setValue('@ps_keyword_lang', value);
+		},
+		assert_ps_keyword_lang(value){
+			return this.assert.value('@ps_keyword_lang', value);
+		},
+		set_ps_sector(value) {
+			return this.setValue('@ps_sector', value);
+		},
+		assert_ps_sector(value){
+			return this.assert.value('@ps_sector', value);
+		},
+		set_ps_sector2(value) {
+			return this.setValue('@ps_sector2', value);
+		},
+		assert_ps_sector2(value){
+			return this.assert.value('@ps_sector2', value);
+		},
+		set_ps_type(value) {
+			return this.setValue('@ps_type', value);
+		},
+		assert_ps_type(value){
+			return this.assert.value('@ps_type', value);
+		},
+		set_ps_language(value) {
+			return this.setValue('@ps_language', value);
+		},
+		assert_ps_language(value){
+			return this.assert.value('@ps_language', value);
+		},
+		set_ps_status(value) {
+			return this.setValue('@ps_status', value);
+		},
+		assert_ps_status(value){
+			return this.assert.value('@ps_status', value);
+		},
+		set_ps_spatial(value) {
+			return this.setValue('@ps_spatial', value);
+		},
+		assert_ps_spatial(value){
+			return this.assert.value('@ps_spatial', value);
+		},
+		set_ps_pt_years(value) {
+			return this.setValue('@ps_pt_years', value);
+		},
+		assert_ps_pt_years(value){
+			return this.assert.value('@ps_pt_years', value);
+		},
+		set_ps_pt_months(value) {
+			return this.setValue('@ps_pt_months', value);
+		},
+		assert_ps_pt_months(value){
+			return this.assert.value('@ps_pt_months', value);
+		},
+		set_ps_pt_days(value) {
+			return this.setValue('@ps_pt_days', value);
+		},
+		assert_ps_pt_days(value){
+			return this.assert.value('@ps_pt_days', value);
+		},
+		set_ps_pt_hours(value) {
+			return this.setValue('@ps_pt_hours', value);
+		},
+		assert_ps_pt_hours(value){
+			return this.assert.value('@ps_pt_hours', value);
+		},
+		set_ps_pt_minutes(value) {
+			return this.setValue('@ps_pt_minutes', value);
+		},
+		assert_ps_pt_minutes(value){
+			return this.assert.value('@ps_pt_minutes', value);
+		},
+		set_ps_pt(value) {
+			return this.set_ps_pt_years(value.years)
+						.set_ps_pt_months(value.months)
+						.set_ps_pt_days(value.days)
+						.set_ps_pt_hours(value.hours)
+						.set_ps_pt_minutes(value.minutes);
+		},
+		assert_ps_pt(value) {
+			return this.assert_ps_pt_years(value.years)
+						.assert_ps_pt_months(value.months)
+						.assert_ps_pt_days(value.days)
+						.assert_ps_pt_hours(value.hours)
+						.assert_ps_pt_minutes(value.minutes);
+		},
+		set_ps_requires(value) {
+			return this.setValue('@ps_requires', value);
+		},
+		assert_ps_requires(value){
+			return this.assert.value('@ps_requires', value);
+		},
+		set_ps_related(value) {
+			return this.setValue('@ps_related', value);
+		},
+		assert_ps_related(value){
+			return this.assert.value('@ps_related', value);
+		},
+		set_ca_identifier(value) {
+			return this.setValue('@ca_identifier', value);
+		},
+		assert_ca_identifier(value){
+			return this.assert.value('@ca_identifier', value);
+		},
+		set_ca_preferredlabel(value) {
+			return this.setValue('@ca_preferredlabel', value);
+		},
+		assert_ca_preferredlabel(value){
+			return this.assert.value('@ca_preferredlabel', value);
+		},
+		set_ca_preferredlabel_lang(value) {
+			return this.setValue('@ca_preferredlabel_lang', value);
+		},
+		assert_ca_preferredlabel_lang(value){
+			return this.assert.value('@ca_preferredlabel_lang', value);
+		},
+		set_ca_spatial(value) {
+			return this.setValue('@ca_spatial', value);
+		},
+		assert_ca_spatial(value){
+			return this.assert.value('@ca_spatial', value);
+		},
+		set_be_identifier(value) {
+			return this.setValue('@be_identifier', value);
+		},
+		assert_be_identifier(value){
+			return this.assert.value('@be_identifier', value);
+		},
+		set_be_name(value) {
+			return this.setValue('@be_name', value);
+		},
+		assert_be_name(value){
+			return this.assert.value('@be_name', value);
+		},
+		set_be_name_lang(value) {
+			return this.setValue('@be_name_lang', value);
+		},
+		assert_be_name_lang(value){
+			return this.assert.value('@be_name_lang', value);
+		},
+		set_be_description(value) {
+			return this.setValue('@be_description', value);
+		},
+		assert_be_description(value){
+			return this.assert.value('@be_description', value);
+		},
+		set_be_description_lang(value) {
+			return this.setValue('@be_description_lang', value);
+		},
+		assert_be_description_lang(value){
+			return this.assert.value('@be_description_lang', value);
+		}
+	}]
 };

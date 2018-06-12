@@ -1,34 +1,30 @@
 var config = require('../../nightwatch.conf.js');
+var util = require('../../page-objects/utils/util.js');
 var fs = require('fs');
-var codelist = require('../../page-objects/CPSVtemplateWithCodelists.json');
 var path = require('path');
+
 var scriptName = path.basename(__filename, '.js');
-var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
-var time_pause = 1000;
-var download_folder = "downloads/";
+var testdata_filename = scriptName + '.rdf';
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
-var default_file = "PublicServiceDescriptionRDFXML.xml";
-var enable_screenshot = true;
-var testfield = '@ps_type';
+var testdata_file = path.resolve(testdata_folder + testdata_filename);
+var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'utf8'});
+var download_folder = "downloads/";
 
-var types = codelist.templates[0].content[5].choices;
-//var uri =languages.find(o => o.label === 'English').value;
-var type = types[Math.floor(Math.random() * types.length)];
+var time_pause = 1000;
+var enable_screenshot = false;
+
+var type = util.getRandomType();
 var type_label = type.label;
-var type_value = type.value;
+var type_value = util.escapeSpecialChars(type.value);
 
-var first_type = types.find(o => o.label === '01 - General public services');
-var first_type_label = first_type.label;
-var first_type_value = first_type.value;
+var def_type = util.getDefaultType();
+var def_type_label = def_type.label;
+var def_type_value = util.escapeSpecialChars(def_type.value);
 
 console.log(type_label + " **** " + type_value);
-console.log(first_type_label + " **** " + first_type_value);
+console.log(def_type_label + " **** " + def_type_value);
 
-escapeSpecialChars = function(string) {
-  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-};
-
-module.exports = { // addapted from: https://git.io/vodU0
+module.exports = {
 	'@tags': ['CSPV'],
 	'Field appears in Presenter': function(browser) {
 		var editor = browser.page.Editor();
@@ -36,8 +32,8 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.setValue(testfield, type_label)
-			.click('@tab');
+			.set_ps_type(type_label)
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -45,7 +41,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -53,31 +49,32 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, type_label);
+			.assert_ps_type(type_label);
 	},
 
 	'Field appears in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
 				.saveScreenshot(config.imgpath(browser) + 'rdfdata.png');
 		}
 
+		browser
+			.pause(time_pause);
+
 		rdfdata
-			.getValue('@textarea', function(result){
-				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(first_type_value, type_value).replace(/[\n\r]+/g, '') );
-			})
+			.verify_textarea(contents.replace(def_type_value, type_value));
 	},
 	
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.setValue('@upload', require('path').resolve(testdata_folder + scriptName+'.rdf'));
+			.upload(testdata_file);
 
 		browser
 			.pause(time_pause);
@@ -88,16 +85,14 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		rdfdata
-			.getValue('@textarea', function(result){
-				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), contents.replace(/[\n\r]+/g, '') );
-			});
+			.verify_textarea(contents);
 	},
 
 	'Upload appears in Presenter': function(browser) {
 		var presenter = browser.page.Presenter();
 
 		presenter
-			.click('@tab')
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -106,14 +101,14 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert.containsText(testfield, first_type_label);
+			.assert_ps_type(def_type_label);
 	},
 
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
 		editor
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -122,14 +117,14 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert.value(testfield, first_type_label);
+			.assert_ps_type(def_type_label);
 	},
 
 	'Download in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
 		rdfdata
-			.click('@tab');
+			.select();
 
 		if(enable_screenshot){
 			browser
@@ -138,21 +133,13 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		rdfdata
-			.click('@download');
+			.download();
 
 		browser
-			.pause(time_pause);
+			.pause(time_pause*4);
 
 		rdfdata
-			.getValue('@textarea', function(resultarea){
-				var rename = fs.renameSync(download_folder + default_file, download_folder + scriptName + '.rdf', function(err) {
-					if ( err ) console.log('ERROR: ' + err);
-				});
-				var download = fs.readFileSync(download_folder + scriptName+'.rdf', { 'encoding': 'utf8'});
-				rdfdata.getValue('@textarea', function(resultarea){
-					this.assert.equal( resultarea.value.replace(/[\n\r]+/g, ''), download.replace(/[\n\r]+/g, '') );
-				});
-			});
+			.verify_download(download_folder, testdata_filename);
 
 		if(enable_screenshot){
 			browser

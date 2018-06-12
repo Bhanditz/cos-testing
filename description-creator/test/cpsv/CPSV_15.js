@@ -13,15 +13,19 @@ var download_folder = "downloads/";
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var pt = util.getRandomProcessingTime();
-var pt_text = pt.text();
+var nodeid = "testca";
+var entityid = nodeid;
+var spatial = util.getRandomSpatial();
+var spatial_label = spatial.label;
+var spatial_value = spatial.value;
 
-var def_pt = util.getDefaultProcessingTime();
-var def_pt_text = def_pt.text();
+var def_spatial = util.getDefaultSpatial();
+var def_spatial_label = def_spatial.label;
+var def_spatial_value = def_spatial.value;
 
-console.log(pt_text);
+console.log(spatial_label + " **** " + spatial_value );
 
-module.exports = { // addapted from: https://git.io/vodU0
+module.exports = {
 	'@tags': ['CSPV'],
 	'Field appears in Presenter': function(browser) {
 		var editor = browser.page.Editor();
@@ -29,7 +33,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.set_ps_pt(pt)
+			.set_ca_spatial(spatial_label)
 			.select();
 
 		if(enable_screenshot){
@@ -46,7 +50,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert_ps_pt(pt_text);
+			.assert_ca_spatial(spatial_label);
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -64,9 +68,9 @@ module.exports = { // addapted from: https://git.io/vodU0
 			.pause(time_pause);
 
 		rdfdata
-			.verify_textarea(contents.replace(def_pt_text, pt_text));
+			.verify_textarea_nodeid(contents.replace(def_spatial_value, spatial_value), entityid, nodeid);
 	},
-
+	
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
@@ -98,7 +102,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		presenter
-			.assert_ps_pt(def_pt_text);
+			.assert_ca_spatial(def_spatial_label);
 	},
 
 	'Upload appears in Editor': function(browser) {
@@ -114,7 +118,7 @@ module.exports = { // addapted from: https://git.io/vodU0
 		}
 
 		editor
-			.assert_ps_pt(def_pt);
+			.assert_ca_spatial(def_spatial_label);
 	},
 
 	'Download in RDFData': function(browser) {
