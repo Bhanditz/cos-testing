@@ -68,7 +68,7 @@ module.exports = {
 		rdfdata
 			.verify_textarea(contents.replace(def_status_value, status_value));
 	},
-	
+
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 

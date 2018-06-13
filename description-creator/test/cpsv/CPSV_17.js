@@ -61,7 +61,6 @@ module.exports = {
 			.assert_be_name_lang(lang_value);
 
 	},
-	
 
 	'Field appears in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();

@@ -43,7 +43,6 @@ module.exports = {
 			.assert_ps_identifier(test);
 
 	},
-	
 
 	'Field appears in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
@@ -97,7 +96,7 @@ module.exports = {
 		presenter
 			.assert_ps_identifier(test_upload);
 	},
-	
+
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 

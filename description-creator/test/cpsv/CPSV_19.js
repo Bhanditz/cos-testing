@@ -1,5 +1,4 @@
 var config = require('../../nightwatch.conf.js');
-var util = require('../../page-objects/utils/util.js');
 var fs = require('fs');
 var path = require('path');
 
@@ -7,21 +6,16 @@ var scriptName = path.basename(__filename, '.js');
 var testdata_filename = scriptName + '.rdf';
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var testdata_file = path.resolve(testdata_folder + testdata_filename);
-var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'utf8'});
+var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
 var download_folder = "downloads/";
 
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var spatial = util.getRandomSpatial();
-var spatial_label = spatial.label;
-var spatial_value = spatial.value;
-
-var def_spatial = util.getDefaultSpatial();
-var def_spatial_label = def_spatial.label;
-var def_spatial_value = def_spatial.value;
-
-console.log(spatial_label + " **** " + spatial_value );
+var nodeid = "testbe";
+var entityid = nodeid;
+var test = "http://example.com";
+var test_upload = "http://example2.com";
 
 module.exports = {
 	'@tags': ['CSPV'],
@@ -31,7 +25,8 @@ module.exports = {
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.set_ps_spatial(spatial_label)
+			.be_expand()
+			.set_be_related(test)
 			.select();
 
 		if(enable_screenshot){
@@ -48,7 +43,8 @@ module.exports = {
 		}
 
 		presenter
-			.assert_ps_spatial(spatial_label);
+			.assert_be_related(test);
+
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -66,7 +62,7 @@ module.exports = {
 			.pause(time_pause);
 
 		rdfdata
-			.verify_textarea(contents.replace(def_spatial_value, spatial_value));
+			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test), entityid, nodeid);
 	},
 
 	'Uploading in RDFData': function(browser) {
@@ -85,6 +81,7 @@ module.exports = {
 
 		rdfdata
 			.verify_textarea(contents);
+
 	},
 
 	'Upload appears in Presenter': function(browser) {
@@ -100,7 +97,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_ps_spatial(def_spatial_label);
+			.assert_be_related(test_upload);
 	},
 
 	'Upload appears in Editor': function(browser) {
@@ -116,7 +113,7 @@ module.exports = {
 		}
 
 		editor
-			.assert_ps_spatial(def_spatial_label);
+			.assert_be_related(test_upload);
 	},
 
 	'Download in RDFData': function(browser) {

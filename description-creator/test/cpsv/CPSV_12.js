@@ -43,7 +43,6 @@ module.exports = {
 			.assert_ps_related(test);
 
 	},
-	
 
 	'Field appears in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();

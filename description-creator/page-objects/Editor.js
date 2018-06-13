@@ -132,6 +132,14 @@ module.exports = {
 		be_description_lang: {
 			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		be_related: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "RelatedService"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		be_type: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -338,6 +346,18 @@ module.exports = {
 		},
 		assert_be_description_lang(value){
 			return this.assert.value('@be_description_lang', value);
+		},
+		set_be_related(value) {
+			return this.setValue('@be_related', value);
+		},
+		assert_be_related(value){
+			return this.assert.value('@be_related', value);
+		},
+		set_be_type(value) {
+			return this.setValue('@be_type', value);
+		},
+		assert_be_type(value){
+			return this.assert.value('@be_type', value);
 		}
 	}]
 };

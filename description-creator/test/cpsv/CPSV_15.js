@@ -70,7 +70,7 @@ module.exports = {
 		rdfdata
 			.verify_textarea_nodeid(contents.replace(def_spatial_value, spatial_value), entityid, nodeid);
 	},
-	
+
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 

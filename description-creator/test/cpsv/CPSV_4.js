@@ -58,7 +58,6 @@ module.exports = {
 			.assert_ps_keyword_lang(lang_value);
 
 	},
-	
 
 	'Field appears in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
@@ -113,7 +112,7 @@ module.exports = {
 			.assert_ps_keyword(test_upload)
 			.assert_ps_keyword_lang(def_lang_value);
 	},
-	
+
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 

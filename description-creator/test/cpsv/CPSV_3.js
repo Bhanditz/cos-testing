@@ -112,7 +112,7 @@ module.exports = {
 			.assert_ps_description(test_upload)
 			.assert_ps_description_lang(def_lang_value);
 	},
-	
+
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 

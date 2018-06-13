@@ -13,15 +13,19 @@ var download_folder = "downloads/";
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var spatial = util.getRandomSpatial();
-var spatial_label = spatial.label;
-var spatial_value = spatial.value;
+var nodeid = "testbe";
+var entityid = nodeid;
 
-var def_spatial = util.getDefaultSpatial();
-var def_spatial_label = def_spatial.label;
-var def_spatial_value = def_spatial.value;
+var type = util.getRandomBEType();
+var type_label = type.label.en;
+var type_value = util.escapeSpecialChars(type.value);
 
-console.log(spatial_label + " **** " + spatial_value );
+var def_type = util.getDefaultBEType();
+var def_type_label = def_type.label.en;
+var def_type_value = util.escapeSpecialChars(def_type.value);
+
+console.log(type_label + " **** " + type_value);
+console.log(def_type_label + " **** " + def_type_value);
 
 module.exports = {
 	'@tags': ['CSPV'],
@@ -31,7 +35,8 @@ module.exports = {
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.set_ps_spatial(spatial_label)
+			.be_expand()
+			.set_be_type(type_label)
 			.select();
 
 		if(enable_screenshot){
@@ -48,7 +53,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_ps_spatial(spatial_label);
+			.assert_be_type(type_label);
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -66,9 +71,9 @@ module.exports = {
 			.pause(time_pause);
 
 		rdfdata
-			.verify_textarea(contents.replace(def_spatial_value, spatial_value));
+			.verify_textarea_nodeid(contents.replace(def_type_value, type_value), entityid, nodeid);
 	},
-
+	
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
@@ -100,7 +105,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_ps_spatial(def_spatial_label);
+			.assert_be_type(def_type_label);
 	},
 
 	'Upload appears in Editor': function(browser) {
@@ -116,7 +121,7 @@ module.exports = {
 		}
 
 		editor
-			.assert_ps_spatial(def_spatial_label);
+			.assert_be_type(def_type_label);
 	},
 
 	'Download in RDFData': function(browser) {

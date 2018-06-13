@@ -6,6 +6,7 @@ var types = codelist.templates[0].content[5].choices;
 var languages = codelist.templates[0].content[6].choices;
 var statuses = codelist.templates[0].content[7].choices;
 var spatials = codelist.templates[0].content[8].choices;
+var betypes = codelist.templates[14].content[0].choices;
 
 module.exports = { 
 	escapeSpecialChars : function(string) {
@@ -115,5 +116,13 @@ module.exports = {
 			}
 		};
 		return processingtime;
+	},
+	getDefaultBEType: function() {
+		var def_type = betypes.find(o => o.label.en === '1. Starting business');
+		return def_type;
+	},
+	getRandomBEType: function() {
+		var type = betypes[Math.floor(Math.random() * betypes.length)];
+		return type;
 	}
 };

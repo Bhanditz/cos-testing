@@ -114,7 +114,7 @@ module.exports = {
 			.assert_ca_preferredlabel(test_upload)
 			.assert_ca_preferredlabel_lang(def_lang_value);
 	},
-	
+
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 

@@ -101,10 +101,17 @@ module.exports = {
 		be_description_lang: {
 			selector: '(//div[text()="IsGroupedBy: BusinessEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
 			locateStrategy: 'xpath'
+		},
+		be_related: {
+			selector: '(//div[text()="IsGroupedBy: BusinessEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="RelatedService"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		be_type: {
+			selector: '(//div[text()="IsGroupedBy: BusinessEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
 		}
-
 	},
-	
+
 	commands: [{
 		select() {
 			return this.click('@tab');
@@ -180,6 +187,12 @@ module.exports = {
 		},
 		assert_be_description_lang(value){
 			return this.assert.containsText('@be_description_lang', value);
+		},
+		assert_be_related(value){
+			return this.assert.containsText('@be_related', value);
+		},
+		assert_be_type(value){
+			return this.assert.containsText('@be_type', value);
 		}
 	}]
 };
