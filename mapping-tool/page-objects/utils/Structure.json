@@ -1,0 +1,25 @@
+{ "structure":
+	[
+		{"value": "testmodel1", "uri": "http://www.testmodel1.com"},
+		{"value": "testmodel2", "uri": "http://www.testmodel2.com"},
+		{"value": "PublicService1", "uri": "http://www.testmodel1.com/publicservice1"},
+		{"value": "PublicService2", "uri": "http://www.testmodel2.com/publicservice2"},
+		{"value": "identifier1", "uri": "http://www.testmodel1.com/identifier1"},
+		{"value": "identifier2", "uri": "http://www.testmodel2.com/identifier2"},
+		{"value": "description1", "uri": "http://www.testmodel1.com/description1"},
+		{"value": "description2", "uri": "http://www.testmodel2.com/description2"},
+		{"value": "keyword1", "uri": "http://www.testmodel1.com/keyword1"},
+		{"value": "keyword2", "uri": "http://www.testmodel2.com/keyword2"},
+		{"value": "language", "uri": "http://www.testmodel1.com/language1"},
+		{"value": "language2", "uri": "http://www.testmodel2.com/language2"},
+		{"value": "sector", "uri": "http://www.testmodel1.com/sector1"},
+		{"value": "sector2", "uri": "http://www.testmodel2.com/sector2"}
+	],
+	"relation": [
+		{"value": "Close match"},
+		{"value": "Exact match"},
+		{"value": "Narrow match"},
+		{"value": "Related match"},
+		{"value": "Broad match"}
+	]
+}
