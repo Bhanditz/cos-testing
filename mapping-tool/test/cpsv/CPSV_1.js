@@ -11,6 +11,7 @@ var target_class = util.getTargetClass();
 var source_property = util.getSourceProperty1();
 var target_property = util.getTargetProperty1();
 var relation = util.getRelation1();
+var relation_to_change = util.getRelation2();
 
 console.log(source_model.value + " ** " + target_model.value);
 console.log(source_class.value + " ** " + target_class.value);
@@ -98,7 +99,7 @@ module.exports = {
 
 		if(enable_screenshot){
 			browser
-				.saveScreenshot(config.imgpath(browser) + 'mappings2.png');
+				.saveScreenshot(config.imgpath(browser) + 'edit.png');
 		}
 
 		browser
@@ -120,12 +121,90 @@ module.exports = {
 			.assert_relation(relation.value);
 
 		edit
-			.delete_model()
+			.set_relation(relation_to_change.value);
+
+		edit
 			.submit();
 
 		browser
 			.acceptAlert()
 			.pause(3000);
+
+	},
+	'Change appears in Mapping': function(browser) {
+		var mappings = browser.page.Mappings();
+
+		mappings
+			.select();
+
+		if(enable_screenshot){
+			browser
+				.saveScreenshot(config.imgpath(browser) + 'mappings3.png');
+		}
+
+		mappings
+			.waitForElementVisible('body')
+			.set_select_source_datamodel(source_model.value);
+
+		if(enable_screenshot){
+			browser
+				.saveScreenshot(config.imgpath(browser) + 'mappings4.png');
+		}
+
+		browser
+			.pause(2000);
+
+		mappings
+			.assert_table_rows(1)
+			.assert_table_rows_message(1)
+			.assert_table_row1_source_datamodel(source_model.value)
+			.assert_table_row1_target_datamodel(target_model.value)
+			.assert_table_row1_source_class(source_class.value)
+			.assert_table_row1_target_class(target_class.value)
+			.assert_table_row1_source_property(source_property.value)
+			.assert_table_row1_target_property(target_property.value)
+			.assert_table_row1_relation(relation_to_change.value)
+			.assert_stats_number_relations(1)
+			.assert_stats_percentage_exact_match("100%");
+
+	},
+
+	'Model is deleted': function(browser) {
+		var edit = browser.page.Edit();
+		
+		edit.navigate()
+			.waitForElementVisible('body')
+			.set_select_source_datamodel(source_model.value)
+			.set_select_target_datamodel(target_model.value)
+			.get_relations();
+		
+		edit
+			.assert_source_model_name(source_model.value)
+			.assert_source_model_uri(source_model.uri)
+			.assert_target_model_name(target_model.value)
+			.assert_target_model_uri(target_model.uri)
+			.assert_source_class_name(source_class.value)
+			.assert_source_class_uri(source_class.uri)
+			.assert_target_class_name(target_class.value)
+			.assert_target_class_uri(target_class.uri)
+			.assert_source_property_name(source_property.value)
+			.assert_source_property_uri(source_property.uri)
+			.assert_target_property_name(target_property.value)
+			.assert_target_property_uri(target_property.uri)
+			.assert_relation(relation_to_change.value);
+
+		if(enable_screenshot){
+			browser
+				.saveScreenshot(config.imgpath(browser) + 'edit2.png');
+		}
+
+		edit
+			.delete_model()
+			.submit();
+
+		browser
+			.acceptAlert()
+			.pause(4000);
 
 		edit
 			.assert_source_model_deleted(source_model.value)

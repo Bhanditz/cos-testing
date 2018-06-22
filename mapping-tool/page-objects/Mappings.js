@@ -133,6 +133,18 @@ module.exports = {
 				//expect(result.value).to.equal("Gmail");
 				//console.log(msg.toString()+result.value);
 			});
+		},
+		assert_stats_percentage_exact_match(value){
+			var that = this;
+			return this.getText('@statistics', function(result) {
+				var exact_matches = result.value.split("\n")[3];
+				var num_exact_matches = exact_matches.split(" = ")[1];
+				console.log(num_exact_matches);
+				that.assert.equal(num_exact_matches, value );
+				//return stats;
+				//expect(result.value).to.equal("Gmail");
+				//console.log(msg.toString()+result.value);
+			});
 		}
 	}]
 };

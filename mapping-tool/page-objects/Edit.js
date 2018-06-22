@@ -175,7 +175,7 @@ module.exports = {
 			return this.assert.value('@target_class_uri', value);
 		},
 		set_relation(value) {
-			return this.setValue('@relation', value);
+			return this.selectOptionByText(this.elements.relation.selector,value);
 		},
 		assert_relation(value){
 			return this.assert.optionIsSelected(this.elements.relation.selector, value);
