@@ -7,7 +7,7 @@ exports.command = function (elementId, data, callback) {
         function(args) {
             var jSel = jQuery(arguments[0]);
             var selection = arguments[1];
-            if (jSel != null) {
+            if (jSel !== null) {
 				jQuery(arguments[0] + " > option").each(function() {
                     if (this.text.toLowerCase() === selection.toLowerCase()) {
 

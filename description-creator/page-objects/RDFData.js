@@ -38,7 +38,7 @@ module.exports = {
 				var found_rdf_prefixes = new RegExp(util.extractRDFPrefix(value), 'g');
 				var replace_value = value.replace(found_nodeids, util.extractNodeID(result.value, util.getEntity(entity))).replace(found_rdf_prefixes, util.extractRDFPrefix(result.value));
 				this.assert.equal( result.value.replace(/[\n\r]+/g, ''), replace_value.replace(/[\n\r]+/g, ''));
-			})
+			});
 		},
 		upload(file){
 			return this.setValue('@upload', file);

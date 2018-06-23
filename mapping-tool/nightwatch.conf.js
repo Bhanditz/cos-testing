@@ -18,7 +18,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     "cli_args": {
       "webdriver.chrome.driver" : "",
 	  "webdriver.gecko.driver" : "./node_modules/geckodriver/geckodriver.exe",
-	  "webdriver.firefox.profile" : "nightwatch"
+	  "webdriver.firefox.profile" : "mapping"
     }
   },
   "test_workers" : {"enabled" : false, "workers" : "auto"}, // perform tests in parallel where possible

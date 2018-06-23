@@ -1,3 +1,6 @@
+var fs = require('fs');
+var assert = require('assert');
+
 module.exports = {
 	url: function() { 
 		return "http://cpsv-ap.semic.eu:8890/cpsv-ap_mapping/editmappings"; 
@@ -95,6 +98,9 @@ module.exports = {
 		},
 		get_relations() {
 			return this.click('@button_get_relations');
+		},
+		export_relations() {
+			return this.click('@button_export_relations');
 		},
 		set_select_source_datamodel(value) {
 			return this.selectOptionByText(this.elements.select_source_datamodel.selector,value);
@@ -197,6 +203,9 @@ module.exports = {
 		},
 		assert_target_model_deleted(value){
 			return this.assert.containsText('@target_model_deleted', value + " was deleted");
+		},
+		verify_download(testdata_file){
+				return this.assert.fileEqual(testdata_file);
 		}
 	}]
 };

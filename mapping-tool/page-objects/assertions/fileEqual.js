@@ -6,9 +6,12 @@
 //
 // for how to write custom assertions see
 // http://nightwatchjs.org/guide#writing-custom-assertions
-exports.assertion = function (selector, count) {
-  this.message = 'Testing if element <' + selector + '> has count: ' + count;
-  this.expected = count;
+var fs = require('fs');
+
+exports.assertion = function (testdata_file) {
+  var downloaded_file = fs.readFileSync('downloads/export.rdf', { 'encoding': 'utf8'}).replace(/[\n\r]+/g, '');
+  this.message = 'Testing if file ' + testdata_file + ' is the same as ' + 'downloads/export.rdf';
+  this.expected = downloaded_file;
   this.pass = function (val) {
     return val === this.expected;
   };
@@ -17,9 +20,9 @@ exports.assertion = function (selector, count) {
   };
   this.command = function (cb) {
     var self = this;
-    return this.api.execute(function (selector) {
-      return document.querySelectorAll(selector).length;
-    }, [selector], function (res) {
+    return this.api.execute(function (testdata_file) {
+		return testdata_file.replace(/[\n\r]+/g, '');
+    }, [testdata_file], function (res) {
       cb.call(self, res);
     });
   };

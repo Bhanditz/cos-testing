@@ -8,10 +8,10 @@ module.exports = {
 			locateStrategy: 'xpath'
 		},
 		browse_upload: {
-			selector: '#edit-wrapper-import-myfile-upload'
+			selector: 'input#edit-wrapper-import-myfile-upload'
 		},
 		button_upload: {
-			selector: '#edit-wrapper-import-myfile-upload-button--4'
+			selector: '#edit-wrapper-import-myfile-upload-button'
 		},
 		select_source_model: {
 			selector: '#edit-datamodellist1'
@@ -172,7 +172,7 @@ module.exports = {
 			return this.selectOptionByText(this.elements.relation.selector,value);
 		},
 		assert_relation(value){
-			return this.assert.value('@relation', value);
+			return  this.assert.optionIsSelected(this.elements.relation.selector, value);
 		},
 		set_syntax_mapping(value) {
 			return this.setValue('@syntax_mapping', value);
@@ -186,5 +186,11 @@ module.exports = {
 		assert_message_mapping_submitted(){
 			return this.assert.containsText('@message_mapping_submitted', "Mapping submitted");
 		},
+		upload(file){
+			return this.setValue('@browse_upload', file);
+		},
+		upload2(){
+			return this.click('@button_upload');
+		}
 	}]
 };

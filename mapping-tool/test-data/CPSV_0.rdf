@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<rdf:RDF
+		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+	
+		<rdf:Description rdf:about="http://cpsv-ap_mapping.eu/0">
+			<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#mappingRelation"/>
+			<rdf:Property rdf:resource="http://www.testmodel1.com/identifier1"/>
+			<rdfs:Class rdf:resource="http://www.testmodel1.com/publicservice1"/>
+			<skos:closeMatch rdf:resource="http://www.testmodel2.com/identifier2"/>
+			<skos:inScheme rdf:resource="http://www.testmodel2.com/publicservice2"/>
+		</rdf:Description>
+		
+	</rdf:RDF>
