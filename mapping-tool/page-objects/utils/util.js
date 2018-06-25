@@ -78,5 +78,14 @@ module.exports = {
 	getRelation5: function() {
 		var find_object = relation.find(o => o.value === 'Broad match');
 		return find_object;
+	},
+	getRandomRelation: function() {
+		var rel = relation[Math.floor(Math.random() * relation.length)];
+		return rel;
+	},
+	getNextRelation: function(rel) {
+		var index = relation.indexOf(rel);
+		var index2 = (index+1)%relation.length;
+		return relation[index2];
 	}
 };

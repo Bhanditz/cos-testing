@@ -10,13 +10,14 @@ var source_class = util.getSourceClass();
 var target_class = util.getTargetClass();
 var source_property = util.getSourceProperty1();
 var target_property = util.getTargetProperty1();
-var relation = util.getRelation1();
-var relation_to_change = util.getRelation2();
+var relation = util.getRandomRelation();
+var relation_to_change = util.getNextRelation(relation);
 
 console.log(source_model.value + " ** " + target_model.value);
 console.log(source_class.value + " ** " + target_class.value);
 console.log(source_property.value + " ** " + target_property.value);
 console.log(" => " + relation.value);
+console.log(" => " + relation_to_change.value);
 
 module.exports = {
 	'@tags': ['CSPV'],
@@ -84,7 +85,7 @@ module.exports = {
 			.assert_table_row1_target_property(target_property.value)
 			.assert_table_row1_relation(relation.value)
 			.assert_stats_number_relations(1)
-			.assert_stats_percentage_close_match("100%");
+			.assert_stats_percentage(relation.value, "100%");
 
 	},
 
@@ -165,7 +166,7 @@ module.exports = {
 			.assert_table_row1_target_property(target_property.value)
 			.assert_table_row1_relation(relation_to_change.value)
 			.assert_stats_number_relations(1)
-			.assert_stats_percentage_exact_match("100%");
+			.assert_stats_percentage(relation_to_change.value, "100%");
 
 	},
 
@@ -177,6 +178,11 @@ module.exports = {
 			.set_select_source_datamodel(source_model.value)
 			.set_select_target_datamodel(target_model.value)
 			.get_relations();
+
+		if(enable_screenshot){
+			browser
+				.saveScreenshot(config.imgpath(browser) + 'edit2.png');
+		}
 		
 		edit
 			.assert_source_model_name(source_model.value)
@@ -192,11 +198,6 @@ module.exports = {
 			.assert_target_property_name(target_property.value)
 			.assert_target_property_uri(target_property.uri)
 			.assert_relation(relation_to_change.value);
-
-		if(enable_screenshot){
-			browser
-				.saveScreenshot(config.imgpath(browser) + 'edit2.png');
-		}
 
 		edit
 			.delete_model()

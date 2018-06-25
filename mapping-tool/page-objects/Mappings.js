@@ -122,6 +122,27 @@ module.exports = {
 				//console.log(msg.toString()+result.value);
 			});
 		},
+		assert_stats_percentage(match, value) {
+			var that = this;
+			return this.getText('@statistics', function(result) {
+				var splitat;
+				if(match == "Broad match") {
+					splitat = 1;
+				} else if(match == "Close match") {
+					splitat = 2;
+				} else if (match == "Exact match") {
+					splitat = 3;
+				} else if (match == "Narrow match") {
+					splitat = 4;
+				} else if (match == "Related match") {
+					splitat = 5;
+				}
+				var matches = result.value.split("\n")[splitat];
+				var num_matches = matches.split(" = ")[1];
+				console.log(num_matches);
+				that.assert.equal(num_matches, value )
+			});
+		},
 		assert_stats_percentage_close_match(value){
 			var that = this;
 			return this.getText('@statistics', function(result) {
