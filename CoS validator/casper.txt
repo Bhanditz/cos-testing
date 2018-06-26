@@ -1,0 +1,1 @@
+casperjs test tests/ --testname=test-rule- --url=http://cpsv-ap.semic.eu --page=cpsv-ap_validator --endpoint=sparql-graph-crud --output=output --testdata=test-data --xunit=output/xunit.xml
