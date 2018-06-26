@@ -1,6 +1,8 @@
 var structure = require('./Structure.json');
 var struct = structure.structure;
 var relation = structure.relation;
+var CPSVAPClass = structure.CPSVAPClass;
+var CPSVAPProperty = structure.CPSVAPProperty;
 
 module.exports = { 
 	getSourceModel : function(string) {
@@ -87,5 +89,17 @@ module.exports = {
 		var index = relation.indexOf(rel);
 		var index2 = (index+1)%relation.length;
 		return relation[index2];
+	},
+	getTargetCPSVAPModel : function(string) {
+		var find_object  = struct.find(o => o.value === 'testmodel');
+		return find_object ;
+	},
+	getRandomSourceClass: function() {
+		var rel = CPSVAPClass[Math.floor(Math.random() * CPSVAPClass.length)];
+		return rel;
+	},
+	getRandomSourceProperty: function() {
+		var rel = CPSVAPProperty[Math.floor(Math.random() * CPSVAPProperty.length)];
+		return rel;
 	}
 };

@@ -13,7 +13,8 @@
 		{"value": "language", "uri": "http://www.testmodel1.com/language1"},
 		{"value": "language2", "uri": "http://www.testmodel2.com/language2"},
 		{"value": "sector", "uri": "http://www.testmodel1.com/sector1"},
-		{"value": "sector2", "uri": "http://www.testmodel2.com/sector2"}
+		{"value": "sector2", "uri": "http://www.testmodel2.com/sector2"},
+		{"value": "testmodel", "uri": "testmodelUri.com"}
 	],
 	"relation": [
 		{"value": "Close match"},
@@ -21,5 +22,50 @@
 		{"value": "Narrow match"},
 		{"value": "Related match"},
 		{"value": "Broad match"}
+	],
+	"CPSVAPClass": [
+		{"value": "PublicService"},
+		{"value": "BusinessEvent"},
+		{"value": "LifeEvent"},
+		{"value": "Participation"},
+		{"value": "CriterionRequirement"},
+		{"value": "Evidence"},
+		{"value": "Output"},
+		{"value": "Cost"},
+		{"value": "Channel"},
+		{"value": "OpeningHoursSpecification"},
+		{"value": "Rule"},
+		{"value": "FormalFramework"},
+		{"value": "Agent"},
+		{"value": "PublicOrganization"},
+		{"value": "ContactPoint"},
+		{"value": "Address"},
+		{"value": "PublicServiceDataset"}
+	],
+	"CPSVAPProperty": [
+		{"value": "Identifier"},
+		{"value": "title"},
+		{"value": "description"},
+		{"value": "keyword"},
+		{"value": "sector"},
+		{"value": "type"},
+		{"value": "language"},
+		{"value": "status"},
+		{"value": "isGroupedBy"},
+		{"value": "requires"},
+		{"value": "relation"},
+		{"value": "hasCriterion"},
+		{"value": "hasCompetentAuthority"},
+		{"value": "hasParticipation"},
+		{"value": "hasInput"},
+		{"value": "hasFormalFramework"},
+		{"value": "produces"},
+		{"value": "follows"},
+		{"value": "spatial"},
+		{"value": "hasContactPoint"},
+		{"value": "hasChannel"},
+		{"value": "processingTime"},
+		{"value": "hasCost"},
+		{"value": "isDescribedAt"}
 	]
 }

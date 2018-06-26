@@ -75,7 +75,27 @@ module.exports = {
 			});
 		},
 		set_select_target_datamodel(value) {
-			return this.click('@select_source_datamodel',()=>{
+			return this.click('@select_target_datamodel',()=>{
+				this.click("option[value='" + value + "']");
+			});
+		},
+		set_select_source_class(value) {
+			return this.click('@select_source_class',()=>{
+				this.click("option[value='" + value + "']");
+			});
+		},
+		set_select_target_class(value) {
+			return this.click('@select_target_class',()=>{
+				this.click("option[value='" + value + "']");
+			});
+		},
+		set_select_relation(value) {
+			return this.click('@select_relation',()=>{
+				this.click("option[value='" + value + "']");
+			});
+		},
+		set_select_target_property(value) {
+			return this.click('@select_target_property',()=>{
 				this.click("option[value='" + value + "']");
 			});
 		},
