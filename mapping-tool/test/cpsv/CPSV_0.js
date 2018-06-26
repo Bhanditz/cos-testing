@@ -2,7 +2,7 @@ var config = require('../../nightwatch.conf.js');
 var util = require('../../page-objects/utils/util.js');
 
 var time_pause = 1000;
-var enable_screenshot = true;
+var enable_screenshot = false;
 
 var target_model = util.getTargetCPSVAPModel();
 var source_class = util.getRandomSourceClass();
@@ -51,7 +51,7 @@ module.exports = {
 			.acceptAlert();
 
 		browser
-			.pause(10000);
+			.pause(7000);
 
 		create
 			.assert_message_mapping_submitted();

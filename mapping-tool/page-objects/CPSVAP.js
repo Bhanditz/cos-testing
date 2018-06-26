@@ -11,7 +11,7 @@ module.exports = {
 			selector: '#edit-datamodellist2'
 		},
 		source_class_name: {
-			selector: '#edit-relations-fieldset-0-source-class'
+			selector: 'div.form-item-relations-fieldset-0-source-class > select'
 		},
 		source_class_uri: {
 			selector: '#edit-relations-fieldset-0-source-class-uri'
@@ -74,7 +74,9 @@ module.exports = {
 			return this.assert.optionIsSelected(this.elements.select_target_model.selector, value);
 		},
 		set_select_source_class_name(value) {
-			return this.setValue('@source_class_name', value);
+			return this.click('@source_class_name',()=>{
+				this.click("option[value='" + value + "']");
+			});
 		},
 		assert_source_class_name(value){
 			return this.assert.value('@source_class_name', value);
