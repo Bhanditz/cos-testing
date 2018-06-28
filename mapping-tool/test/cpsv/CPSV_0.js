@@ -9,6 +9,7 @@ var source_class = util.getRandomSourceClass();
 var relation = util.getRandomRelation();
 var target_property = util.getTargetProperty1();
 var target_class = util.getTargetClass();
+var random_source_property = "";
 
 console.log(target_model.value);
 console.log(source_class.value + " ** " + target_class.value);
@@ -41,7 +42,19 @@ module.exports = {
 			.set_select_source_property_name()
 			.set_target_property_name(target_property.value)
 			.set_target_property_uri(target_property.uri)
-			.set_relation(relation.value)
+			.set_relation(relation.value);
+		
+		browser.getValue('div.form-item-relations-fieldset-0-source-property > select', function(result) {
+									random_source_property = result.value;
+								});
+		browser
+			.perform(function() {
+				console.log("SOURCE:" + random_source_property);
+		});
+		
+
+		
+		create
 			.submit()
 
 		browser
@@ -85,6 +98,18 @@ module.exports = {
 		mappings
 			.set_select_source_class(source_class.value);
 
+
+		browser
+			.pause(2000);
+			
+		browser
+			.perform(function(){
+				console.log("SOURCE:"+ random_source_property);
+				mappings.set_select_source_property(random_source_property);
+			});
+		
+		
+
 		browser
 			.pause(2000);
 
@@ -122,6 +147,51 @@ module.exports = {
 			.assert_table_row1_relation(relation.value)
 			.assert_stats_number_relations(1)
 			.assert_stats_percentage(relation.value, "100%");
+
+	},
+	'Field appears in Edit': function(browser) {
+		var edit = browser.page.Edit();
+
+		edit.navigate()
+			.waitForElementVisible('body')
+			.set_select_source_datamodel("CPSV-AP 2.1")
+			.set_select_target_datamodel(target_model.value)
+			.get_relations();
+
+		if(enable_screenshot){
+			browser
+				.saveScreenshot(config.imgpath(browser) + 'edit.png');
+		}
+
+		browser
+			.pause(2000);
+
+		edit
+			.assert_source_model_name("CPSV-AP 2.1")
+			.assert_target_model_name(target_model.value)
+			.assert_target_model_uri(target_model.uri)
+			.assert_source_class_name(source_class.value)
+			.assert_target_class_name(target_class.value)
+			.assert_target_class_uri(target_class.uri);
+			
+		browser
+			.perform(function(){
+				console.log("SOURCE:"+ random_source_property);
+				edit.assert_source_property_name(random_source_property);
+			});
+			
+		edit
+			.assert_target_property_name(target_property.value)
+			.assert_target_property_uri(target_property.uri)
+			.assert_relation(relation.value);
+		
+		edit
+			.delete_relation()
+			.submit();
+
+		browser
+			.acceptAlert()
+			.pause(4000);
 
 		browser
 			.end();

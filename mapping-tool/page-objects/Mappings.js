@@ -13,6 +13,9 @@ module.exports = {
 		select_source_class: {
 			selector: '#edit-coreclass-selective'
 		},
+		select_source_property: {
+			selector: '#edit-coreproperty-selective'
+		},
 		select_relation: {
 			selector: '#edit-relation-selective'
 		},
@@ -81,6 +84,11 @@ module.exports = {
 		},
 		set_select_source_class(value) {
 			return this.click('@select_source_class',()=>{
+				this.click("option[value='" + value + "']");
+			});
+		},
+		set_select_source_property(value) {
+			return this.click('@select_source_property',()=>{
 				this.click("option[value='" + value + "']");
 			});
 		},
