@@ -1,0 +1,2 @@
+testmodel1|http://www.testmodel1.com||||||testmodel2|http://www.testmodel2.com|;
+PublicService1|http://www.testmodel1.com/publicservice1|identifier1|http://www.testmodel1.com/identifier1|Close match|identifier2|http://www.testmodel2.com/identifier2|PublicService2|http://www.testmodel2.com/publicservice2|FALSE;
