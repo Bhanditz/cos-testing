@@ -71,7 +71,7 @@ module.exports = {
 
 		mappings
 			.waitForElementVisible('body')
-			.set_select_source_datamodel("cpsv-ap2.1");
+			.set_select_source_datamodel("CPSV-AP 2.1");
 		
 		browser
 			.pause(2000);
@@ -114,7 +114,7 @@ module.exports = {
 		mappings
 			.assert_table_rows(1)
 			.assert_table_rows_message(1)
-			.assert_table_row1_source_datamodel("cpsv-ap2.1")
+			.assert_table_row1_source_datamodel("CPSV-AP 2.1")
 			.assert_table_row1_target_datamodel(target_model.value)
 			.assert_table_row1_source_class(source_class.value)
 			.assert_table_row1_target_class(target_class.value)
