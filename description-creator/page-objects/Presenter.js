@@ -109,6 +109,18 @@ module.exports = {
 		be_type: {
 			selector: '(//div[text()="IsGroupedBy: BusinessEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
+		},
+		le_identifier: {
+			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		le_name: {
+			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		le_name_lang: {
+			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -193,6 +205,15 @@ module.exports = {
 		},
 		assert_be_type(value){
 			return this.assert.containsText('@be_type', value);
+		},
+		assert_le_identifier(value){
+			return this.assert.containsText('@le_identifier', value);
+		},
+		assert_le_name(value){
+			return this.assert.containsText('@le_name', value);
+		},
+		assert_le_name_lang(value){
+			return this.assert.containsText('@le_name_lang', value);
 		}
 	}]
 };

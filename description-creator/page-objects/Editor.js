@@ -140,24 +140,28 @@ module.exports = {
 		be_type: {
 			selector: '//div[1]/span[1][text() = "IsGroupedBy: BusinessEvent"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},		
+		le_click: {
+			selector: '(//span[text() = "IsGroupedBy: LifeEvent"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		le_identifier: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		le_name: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		le_name_lang: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
 	commands: [{
 		select() {
 			return this.click('@tab');
-		},
-		be_expand() {
-			this.api.execute(function(xpath) {
-				function getElementByXpath(path) {
-					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-				}
-				var res = getElementByXpath(xpath);
-				res.scrollIntoView(true);
-			}, [this.elements.be_click.selector]);
-			this.assert.visible('@be_click');
-			this.click('@be_click');
-			return this;
 		},
 		set_ps_identifier(value) {
 			return this.setValue('@ps_identifier', value);
@@ -317,6 +321,18 @@ module.exports = {
 		assert_ca_spatial(value){
 			return this.assert.value('@ca_spatial', value);
 		},
+		be_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.be_click.selector]);
+			this.assert.visible('@be_click');
+			this.click('@be_click');
+			return this;
+		},
 		set_be_identifier(value) {
 			return this.setValue('@be_identifier', value);
 		},
@@ -358,6 +374,36 @@ module.exports = {
 		},
 		assert_be_type(value){
 			return this.assert.value('@be_type', value);
+		},
+		le_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.le_click.selector]);
+			this.assert.visible('@le_click');
+			this.click('@le_click');
+			return this;
+		},
+		set_le_identifier(value) {
+			return this.setValue('@le_identifier', value);
+		},
+		assert_le_identifier(value){
+			return this.assert.value('@le_identifier', value);
+		},
+		set_le_name(value) {
+			return this.setValue('@le_name', value);
+		},
+		assert_le_name(value){
+			return this.assert.value('@le_name', value);
+		},
+		set_le_name_lang(value) {
+			return this.setValue('@le_name_lang', value);
+		},
+		assert_le_name_lang(value){
+			return this.assert.value('@le_name_lang', value);
 		}
 	}]
 };
