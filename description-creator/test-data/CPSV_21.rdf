@@ -5,10 +5,10 @@
   <rdf:Description rdf:nodeID="PS_0">
     <rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
     <dcterms:identifier>PS_0</dcterms:identifier>
-    <ns1:isGroupedBy rdf:nodeID="testbe"/>
+    <ns1:isGroupedBy rdf:nodeID="test2"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="testbe">
-    <rdf:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent"/>
-    <dcterms:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent/DoingBusiness/StartingBusiness"/>
+  <rdf:Description rdf:nodeID="test2">
+    <rdf:type rdf:resource="http://data.europa.eu/m8g/LifeEvent"/>
+    <dcterms:identifier>test2</dcterms:identifier>
   </rdf:Description>
 </rdf:RDF>
