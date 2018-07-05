@@ -7,6 +7,7 @@ var languages = codelist.templates[0].content[6].choices;
 var statuses = codelist.templates[0].content[7].choices;
 var spatials = codelist.templates[0].content[8].choices;
 var betypes = codelist.templates[14].content[0].choices;
+var letypes = codelist.templates[15].content[0].choices;
 
 module.exports = { 
 	escapeSpecialChars : function(string) {
@@ -123,6 +124,14 @@ module.exports = {
 	},
 	getRandomBEType: function() {
 		var type = betypes[Math.floor(Math.random() * betypes.length)];
+		return type;
+	},
+	getDefaultLEType: function() {
+		var def_type = letypes.find(o => o.label === 'Becoming a (social) caretaker');
+		return def_type;
+	},
+	getRandomLEType: function() {
+		var type = letypes[Math.floor(Math.random() * letypes.length)];
 		return type;
 	}
 };

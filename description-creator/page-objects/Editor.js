@@ -156,6 +156,22 @@ module.exports = {
 		le_name_lang: {
 			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		le_description: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		le_description_lang: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		le_related: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "RelatedService"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		le_type: {
+			selector: '//div[1]/span[1][text() = "IsGroupedBy: LifeEvent"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -404,6 +420,30 @@ module.exports = {
 		},
 		assert_le_name_lang(value){
 			return this.assert.value('@le_name_lang', value);
+		},
+		set_le_description(value) {
+			return this.setValue('@le_description', value);
+		},
+		assert_le_description(value){
+			return this.assert.value('@le_description', value);
+		},
+		set_le_description_lang(value) {
+			return this.setValue('@le_description_lang', value);
+		},
+		assert_le_description_lang(value){
+			return this.assert.value('@le_description_lang', value);
+		},
+		set_le_related(value) {
+			return this.setValue('@le_related', value);
+		},
+		assert_le_related(value){
+			return this.assert.value('@le_related', value);
+		},
+		set_le_type(value) {
+			return this.setValue('@le_type', value);
+		},
+		assert_le_type(value){
+			return this.assert.value('@le_type', value);
 		}
 	}]
 };

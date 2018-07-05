@@ -1,6 +1,7 @@
 {
 	"root": "cpsv:PublicService",
-	"templates": [{
+	"templates": [
+	{
 		"id": "cpsv:PublicService",
 		"type": "group",
 		"label": {

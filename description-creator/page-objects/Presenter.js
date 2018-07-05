@@ -121,6 +121,22 @@ module.exports = {
 		le_name_lang: {
 			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
 			locateStrategy: 'xpath'
+		},
+		le_description: {
+			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		le_description_lang: {
+			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		le_related: {
+			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="RelatedService"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		le_type: {
+			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -214,6 +230,18 @@ module.exports = {
 		},
 		assert_le_name_lang(value){
 			return this.assert.containsText('@le_name_lang', value);
+		},		
+		assert_le_description(value){
+			return this.assert.containsText('@le_description', value);
+		},
+		assert_le_description_lang(value){
+			return this.assert.containsText('@le_description_lang', value);
+		},
+		assert_le_related(value){
+			return this.assert.containsText('@le_related', value);
+		},
+		assert_le_type(value){
+			return this.assert.containsText('@le_type', value);
 		}
 	}]
 };
