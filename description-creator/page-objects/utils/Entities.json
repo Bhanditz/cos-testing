@@ -2,6 +2,7 @@
 	[
 		{"value": "ca", "label": "hasCompetentAuthority"},
 		{"value": "be", "label": "isGroupedBy"},
-		{"value": "le", "label": "isGroupedBy"}
+		{"value": "le", "label": "isGroupedBy"},
+		{"value": "c", "label": "HasCriterion"}
 	]
 }
