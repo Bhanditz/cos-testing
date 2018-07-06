@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	xmlns:ns1="http://data.europa.eu/m8g/">
+	xmlns:ns1="http://data.europa.eu/m8g/"
+	xmlns:dcterms="http://purl.org/dc/terms/">
   <rdf:Description rdf:nodeID="PS_0">
     <rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
     <dcterms:identifier>PS_0</dcterms:identifier>
-    <ns1:serviceProvider rdf:nodeID="_2"/>
+    <ns1:serviceProvider rdf:nodeID="testpr"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="_2">
+  <rdf:Description rdf:nodeID="testpr">
     <rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
     <ns1:hasAddress>test2</ns1:hasAddress>
   </rdf:Description>
