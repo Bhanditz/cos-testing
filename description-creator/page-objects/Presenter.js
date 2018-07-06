@@ -171,7 +171,7 @@ module.exports = {
 			locateStrategy: 'xpath'
 		},
 		pr_hasaddress: {
-			selector: '(//div[text()="ServiceProvider"])[1]/../div[2]/div[1]/div[3]/div[text()="HasAddress"]/../div[2]/div[1]/div[1]',
+			selector: '(//div[text()="ServiceProvider"])[1]/../div[2]/div[1]/div[1]/div[text()="HasAddress"]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
 		}
 	},
