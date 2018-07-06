@@ -9,6 +9,6 @@
   </rdf:Description>
   <rdf:Description rdf:nodeID="testcr">
     <rdf:type rdf:resource="http://data.europa.eu/m8g/CriterionRequirement"/>
-    <dcterms:title xml:lang="en">test2</dcterms:title>
+    <dcterms:type xml:lang="en">test2</dcterms:type>
   </rdf:Description>
 </rdf:RDF>

@@ -188,6 +188,14 @@ module.exports = {
 		cr_name_lang: {
 			selector: '//div[1]/span[1][text() = "HasCriterion"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		cr_type: {
+			selector: '//div[1]/span[1][text() = "HasCriterion"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		cr_type_lang: {
+			selector: '//div[1]/span[1][text() = "HasCriterion"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -490,6 +498,18 @@ module.exports = {
 		},
 		assert_cr_name_lang(value){
 			return this.assert.value('@cr_name_lang', value);
+		},
+		set_cr_type(value) {
+			return this.setValue('@cr_type', value);
+		},
+		assert_cr_type(value){
+			return this.assert.value('@cr_type', value);
+		},
+		set_cr_type_lang(value) {
+			return this.setValue('@cr_type_lang', value);
+		},
+		assert_cr_type_lang(value){
+			return this.assert.value('@cr_type_lang', value);
 		}
 	}]
 };

@@ -149,6 +149,14 @@ module.exports = {
 		cr_name_lang: {
 			selector: '(//div[text()="HasCriterion"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
 			locateStrategy: 'xpath'
+		},
+		cr_type: {
+			selector: '(//div[text()="HasCriterion"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		cr_type_lang: {
+			selector: '(//div[text()="HasCriterion"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -263,6 +271,12 @@ module.exports = {
 		},
 		assert_cr_name_lang(value){
 			return this.assert.containsText('@cr_name_lang', value);
+		},
+		assert_cr_type(value){
+			return this.assert.containsText('@cr_type', value);
+		},
+		assert_cr_type_lang(value){
+			return this.assert.containsText('@cr_type_lang', value);
 		}
 	}]
 };
