@@ -5,11 +5,11 @@
   <rdf:Description rdf:nodeID="PS_0">
     <rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
     <dcterms:identifier>PS_0</dcterms:identifier>
-    <ns1:hasCriterion rdf:nodeID="testc"/>
+    <ns1:hasCriterion rdf:nodeID="testcr"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="testc">
+  <rdf:Description rdf:nodeID="testcr">
     <rdf:type rdf:resource="http://data.europa.eu/m8g/CriterionRequirement"/>
-    <dcterms:identifier>testc</dcterms:identifier>
+    <dcterms:identifier>testcr</dcterms:identifier>
     <dcterms:title xml:lang="en">test2</dcterms:title>
   </rdf:Description>
 </rdf:RDF>

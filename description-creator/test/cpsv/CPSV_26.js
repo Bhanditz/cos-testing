@@ -25,8 +25,8 @@ module.exports = {
 			.waitForElementVisible('body');
 
 		editor
-			.c_expand()
-			.set_c_identifier(test)
+			.cr_expand()
+			.set_cr_identifier(test)
 			.select();
 
 		if(enable_screenshot){
@@ -43,7 +43,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_c_identifier(test);
+			.assert_cr_identifier(test);
 
 	},
 
@@ -97,7 +97,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_c_identifier(test_upload);
+			.assert_cr_identifier(test_upload);
 	},
 	
 	'Upload appears in Editor': function(browser) {
@@ -113,7 +113,7 @@ module.exports = {
 		}
 
 		editor
-			.assert_c_identifier(test_upload);
+			.assert_cr_identifier(test_upload);
 	},
 
 	'Download in RDFData': function(browser) {

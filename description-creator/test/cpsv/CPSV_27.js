@@ -13,7 +13,7 @@ var download_folder = "downloads/";
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var nodeid = "testc";
+var nodeid = "testcr";
 var entityid = nodeid;
 var test = "test";
 var test_upload = "test2";
@@ -38,9 +38,9 @@ module.exports = {
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.c_expand()
-			.set_c_name(test)
-			.set_c_name_lang(lang_label)
+			.cr_expand()
+			.set_cr_name(test)
+			.set_cr_name_lang(lang_label)
 			.select();
 
 		if(enable_screenshot){
@@ -57,8 +57,8 @@ module.exports = {
 		}
 
 		presenter
-			.assert_c_name(test)
-			.assert_c_name_lang(lang_value);
+			.assert_cr_name(test)
+			.assert_cr_name_lang(lang_value);
 
 	},
 
@@ -112,8 +112,8 @@ module.exports = {
 		}
 
 		presenter
-			.assert_c_name(test_upload)
-			.assert_c_name_lang(def_lang_value);
+			.assert_cr_name(test_upload)
+			.assert_cr_name_lang(def_lang_value);
 	},
 	
 	'Upload appears in Editor': function(browser) {
@@ -129,8 +129,8 @@ module.exports = {
 		}
 
 		editor
-			.assert_c_name(test_upload)
-			.assert_c_name_lang(def_lang_label);
+			.assert_cr_name(test_upload)
+			.assert_cr_name_lang(def_lang_label);
 	},
 
 	'Download in RDFData': function(browser) {

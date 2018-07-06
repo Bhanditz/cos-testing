@@ -138,15 +138,15 @@ module.exports = {
 			selector: '(//div[text()="IsGroupedBy: LifeEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
 		},
-		c_identifier: {
+		cr_identifier: {
 			selector: '(//div[text()="HasCriterion"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
 		},
-		c_name: {
+		cr_name: {
 			selector: '(//div[text()="HasCriterion"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
 			locateStrategy: 'xpath'
 		},
-		c_name_lang: {
+		cr_name_lang: {
 			selector: '(//div[text()="HasCriterion"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
 			locateStrategy: 'xpath'
 		}
@@ -255,14 +255,14 @@ module.exports = {
 		assert_le_type(value){
 			return this.assert.containsText('@le_type', value);
 		},
-		assert_c_identifier(value){
-			return this.assert.containsText('@c_identifier', value);
+		assert_cr_identifier(value){
+			return this.assert.containsText('@cr_identifier', value);
 		},
-		assert_c_name(value){
-			return this.assert.containsText('@c_name', value);
+		assert_cr_name(value){
+			return this.assert.containsText('@cr_name', value);
 		},
-		assert_c_name_lang(value){
-			return this.assert.containsText('@c_name_lang', value);
+		assert_cr_name_lang(value){
+			return this.assert.containsText('@cr_name_lang', value);
 		}
 	}]
 };
