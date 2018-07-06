@@ -3,6 +3,7 @@
 		{"value": "ca", "label": "hasCompetentAuthority"},
 		{"value": "be", "label": "isGroupedBy"},
 		{"value": "le", "label": "isGroupedBy"},
-		{"value": "cr", "label": "hasCriterion"}
+		{"value": "cr", "label": "hasCriterion"},
+		{"value": "pr", "label": "serviceProvider"}
 	]
 }

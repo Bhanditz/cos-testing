@@ -157,6 +157,22 @@ module.exports = {
 		cr_type_lang: {
 			selector: '(//div[text()="HasCriterion"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
 			locateStrategy: 'xpath'
+		},
+		pr_identifier: {
+			selector: '(//div[text()="ServiceProvider"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		pr_name: {
+			selector: '(//div[text()="ServiceProvider"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		pr_name_lang: {
+			selector: '(//div[text()="ServiceProvider"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		pr_hasaddress: {
+			selector: '(//div[text()="ServiceProvider"])[1]/../div[2]/div[1]/div[1]/div[text()="HasAddress"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -277,6 +293,18 @@ module.exports = {
 		},
 		assert_cr_type_lang(value){
 			return this.assert.containsText('@cr_type_lang', value);
+		},
+		assert_pr_identifier(value){
+			return this.assert.containsText('@pr_identifier', value);
+		},
+		assert_pr_name(value){
+			return this.assert.containsText('@pr_name', value);
+		},
+		assert_pr_name_lang(value){
+			return this.assert.containsText('@pr_name_lang', value);
+		},
+		assert_pr_hasaddress(value){
+			return this.assert.containsText('@pr_hasaddress', value);
 		}
 	}]
 };

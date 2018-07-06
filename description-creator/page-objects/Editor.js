@@ -196,6 +196,26 @@ module.exports = {
 		cr_type_lang: {
 			selector: '//div[1]/span[1][text() = "HasCriterion"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		pr_click: {
+			selector: '(//span[text() = "ServiceProvider"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		pr_identifier: {
+			selector: '//div[1]/span[1][text() = "ServiceProvider"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		pr_name: {
+			selector: '//div[1]/span[1][text() = "ServiceProvider"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		pr_name_lang: {
+			selector: '//div[1]/span[1][text() = "ServiceProvider"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		pr_hasaddress: {
+			selector: '//div[1]/span[1][text() = "ServiceProvider"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "HasAddress"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -510,6 +530,42 @@ module.exports = {
 		},
 		assert_cr_type_lang(value){
 			return this.assert.value('@cr_type_lang', value);
+		},
+		pr_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.pr_click.selector]);
+			this.assert.visible('@pr_click');
+			this.click('@pr_click');
+			return this;
+		},
+		set_pr_identifier(value) {
+			return this.setValue('@pr_identifier', value);
+		},
+		assert_pr_identifier(value){
+			return this.assert.value('@pr_identifier', value);
+		},
+		set_pr_name(value) {
+			return this.setValue('@pr_name', value);
+		},
+		assert_pr_name(value){
+			return this.assert.value('@pr_name', value);
+		},
+		set_pr_name_lang(value) {
+			return this.setValue('@pr_name_lang', value);
+		},
+		assert_pr_name_lang(value){
+			return this.assert.value('@pr_name_lang', value);
+		},
+		set_pr_hasaddress(value) {
+			return this.setValue('@pr_hasaddress', value);
+		},
+		assert_pr_hasaddress(value){
+			return this.assert.value('@pr_hasaddress', value);
 		}
 	}]
 };
