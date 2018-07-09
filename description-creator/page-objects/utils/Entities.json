@@ -4,6 +4,8 @@
 		{"value": "be", "label": "isGroupedBy"},
 		{"value": "le", "label": "isGroupedBy"},
 		{"value": "cr", "label": "hasCriterion"},
-		{"value": "pr", "label": "serviceProvider"}
+		{"value": "pr", "label": "serviceProvider"},
+		{"value": "pa", "label": "hasParticipation"},
+		{"value": "ip", "label": "hasInput"}
 	]
 }

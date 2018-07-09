@@ -173,6 +173,58 @@ module.exports = {
 		pr_hasaddress: {
 			selector: '(//div[text()="ServiceProvider"])[1]/../div[2]/div[1]/div[1]/div[text()="HasAddress"]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
+		},
+		pa_identifier: {
+			selector: '(//div[text()="HasParticipation"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		pa_description: {
+			selector: '(//div[text()="HasParticipation"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		pa_description_lang: {
+			selector: '(//div[text()="HasParticipation"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		pa_role: {
+			selector: '(//div[text()="HasParticipation"])[1]/../div[2]/div[1]/div[1]/div[text()="Role"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		pa_role_lang: {
+			selector: '(//div[text()="HasParticipation"])[1]/../div[2]/div[1]/div[1]/div[text()="Role"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		ip_identifier: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_name: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		ip_name_lang: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		ip_description: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		ip_description_lang: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		ip_type: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		ip_type_lang: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		ip_language: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Language"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -266,7 +318,7 @@ module.exports = {
 		},
 		assert_le_name_lang(value){
 			return this.assert.containsText('@le_name_lang', value);
-		},		
+		},
 		assert_le_description(value){
 			return this.assert.containsText('@le_description', value);
 		},
@@ -305,6 +357,45 @@ module.exports = {
 		},
 		assert_pr_hasaddress(value){
 			return this.assert.containsText('@pr_hasaddress', value);
+		},
+		assert_pa_identifier(value){
+			return this.assert.containsText('@pa_identifier', value);
+		},
+		assert_pa_description(value){
+			return this.assert.containsText('@pa_description', value);
+		},
+		assert_pa_description_lang(value){
+			return this.assert.containsText('@pa_description_lang', value);
+		},
+		assert_pa_role(value){
+			return this.assert.containsText('@pa_description', value);
+		},
+		assert_pa_role_lang(value){
+			return this.assert.containsText('@pa_description_lang', value);
+		},
+		assert_ip_identifier(value){
+			return this.assert.containsText('@ip_identifier', value);
+		},
+		assert_ip_name(value){
+			return this.assert.containsText('@ip_name', value);
+		},
+		assert_ip_name_lang(value){
+			return this.assert.containsText('@ip_name_lang', value);
+		},
+		assert_ip_description(value){
+			return this.assert.containsText('@ip_description', value);
+		},
+		assert_ip_description_lang(value){
+			return this.assert.containsText('@ip_description_lang', value);
+		},
+		assert_ip_type(value){
+			return this.assert.containsText('@ip_type', value);
+		},
+		assert_ip_type_lang(value){
+			return this.assert.containsText('@ip_type_lang', value);
+		},
+		assert_ip_language(value){
+			return this.assert.containsText('@ip_language', value);
 		}
 	}]
 };

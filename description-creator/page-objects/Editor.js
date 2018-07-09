@@ -216,6 +216,66 @@ module.exports = {
 		pr_hasaddress: {
 			selector: '//div[1]/span[1][text() = "ServiceProvider"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "HasAddress"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		pa_click: {
+			selector: '(//span[text() = "HasParticipation"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		pa_identifier: {
+			selector: '//div[1]/span[1][text() = "HasParticipation"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		pa_description: {
+			selector: '//div[1]/span[1][text() = "HasParticipation"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		pa_description_lang: {
+			selector: '//div[1]/span[1][text() = "HasParticipation"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		pa_role: {
+			selector: '//div[1]/span[1][text() = "HasParticipation"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Role"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		pa_role_lang: {
+			selector: '//div[1]/span[1][text() = "HasParticipation"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Role"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_click: {
+			selector: '(//span[text() = "HasInput"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		ip_identifier: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_name: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_name_lang: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_description: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_description_lang: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_type: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_type_lang: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ip_language: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Language"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -566,6 +626,102 @@ module.exports = {
 		},
 		assert_pr_hasaddress(value){
 			return this.assert.value('@pr_hasaddress', value);
+		},
+		pa_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.pa_click.selector]);
+			this.assert.visible('@pa_click');
+			this.click('@pa_click');
+			return this;
+		},
+		set_pa_identifier(value) {
+			return this.setValue('@pa_identifier', value);
+		},
+		assert_pa_identifier(value){
+			return this.assert.value('@pa_identifier', value);
+		},
+		set_pa_description(value) {
+			return this.setValue('@pa_description', value);
+		},
+		assert_pa_description(value){
+			return this.assert.value('@pa_description', value);
+		},
+		set_pa_description_lang(value) {
+			return this.setValue('@pa_description_lang', value);
+		},
+		assert_pa_description_lang(value){
+			return this.assert.value('@pa_description_lang', value);
+		},
+		set_pa_role(value) {
+			return this.setValue('@pa_role', value);
+		},
+		assert_pa_role(value){
+			return this.assert.value('@pa_role', value);
+		},
+		ip_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.ip_click.selector]);
+			this.assert.visible('@ip_click');
+			this.click('@ip_click');
+			return this;
+		},
+		set_ip_identifier(value) {
+			return this.setValue('@ip_identifier', value);
+		},
+		assert_ip_identifier(value){
+			return this.assert.value('@ip_identifier', value);
+		},
+		set_ip_name(value) {
+			return this.setValue('@ip_name', value);
+		},
+		assert_ip_name(value){
+			return this.assert.value('@ip_name', value);
+		},
+		set_ip_name_lang(value) {
+			return this.setValue('@ip_name_lang', value);
+		},
+		assert_ip_name_lang(value){
+			return this.assert.value('@ip_name_lang', value);
+		},
+		set_ip_description(value) {
+			return this.setValue('@ip_description', value);
+		},
+		assert_ip_description(value){
+			return this.assert.value('@ip_description', value);
+		},
+		set_ip_description_lang(value) {
+			return this.setValue('@ip_description_lang', value);
+		},
+		assert_ip_description_lang(value){
+			return this.assert.value('@ip_description_lang', value);
+		},
+		set_ip_type(value) {
+			return this.setValue('@ip_type', value);
+		},
+		assert_ip_type(value){
+			return this.assert.value('@ip_type', value);
+		},
+		set_ip_type_lang(value) {
+			return this.setValue('@ip_type_lang', value);
+		},
+		assert_ip_type_lang(value){
+			return this.assert.value('@ip_type_lang', value);
+		},
+		set_ip_language(value) {
+			return this.setValue('@ip_language', value);
+		},
+		assert_ip_language(value){
+			return this.assert.value('@ip_language', value);
 		}
 	}]
 };
