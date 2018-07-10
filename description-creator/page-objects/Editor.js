@@ -320,6 +320,14 @@ module.exports = {
 		hc_description_lang: {
 			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		hc_value: {
+			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Value"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_currency: {
+			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Currency"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -850,6 +858,18 @@ module.exports = {
 		},
 		assert_hc_description_lang(value){
 			return this.assert.value('@hc_description_lang', value);
+		},
+		set_hc_value(value) {
+			return this.setValue('@hc_value', value);
+		},
+		assert_hc_value(value){
+			return this.assert.value('@hc_value', value);
+		},
+		set_hc_currency(value) {
+			return this.setValue('@hc_currency', value);
+		},
+		assert_hc_currency(value){
+			return this.assert.value('@hc_currency', value);
 		}
 	}]
 };

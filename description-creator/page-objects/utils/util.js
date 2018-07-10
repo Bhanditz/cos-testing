@@ -8,6 +8,7 @@ var statuses = codelist.templates[0].content[7].choices;
 var spatials = codelist.templates[0].content[8].choices;
 var betypes = codelist.templates[14].content[0].choices;
 var letypes = codelist.templates[15].content[0].choices;
+var hccurrencies = codelist.templates[2].content[3].choices;
 
 module.exports = { 
 	escapeSpecialChars : function(string) {
@@ -132,6 +133,14 @@ module.exports = {
 	},
 	getRandomLEType: function() {
 		var type = letypes[Math.floor(Math.random() * letypes.length)];
+		return type;
+	},
+	getDefaultHCCurrency: function() {
+		var def_type = hccurrencies.find(o => o.label === 'ALL-Lek (pl. Leks)');
+		return def_type;
+	},
+	getRandomHCCurrency: function() {
+		var type = hccurrencies[Math.floor(Math.random() * letypes.length)];
 		return type;
 	}
 };

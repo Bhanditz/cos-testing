@@ -261,6 +261,14 @@ module.exports = {
 		hc_description_lang: {
 			selector: '(//div[text()="HasCost"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
 			locateStrategy: 'xpath'
+		},
+		hc_value: {
+			selector: '(//div[text()="HasCost"])[1]/../div[2]/div[1]/div[1]/div[text()="Value"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_currency: {
+			selector: '(//div[text()="HasCost"])[1]/../div[2]/div[1]/div[1]/div[text()="Currency"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -459,6 +467,12 @@ module.exports = {
 		},
 		assert_hc_description_lang(value){
 			return this.assert.containsText('@hc_description_lang', value);
+		},
+		assert_hc_value(value){
+			return this.assert.containsText('@hc_value', value);
+		},
+		assert_hc_currency(value){
+			return this.assert.containsText('@hc_currency', value);
 		}
 	}]
 };
