@@ -10,5 +10,5 @@
   <rdf:Description rdf:nodeID="testpa">
     <rdf:type rdf:resource="http://data.europa.eu/m8g/Participation"/>
     <ns1:role xml:lang="en">test2</ns1:role>
->  </rdf:Description>
+  </rdf:Description>
 </rdf:RDF>

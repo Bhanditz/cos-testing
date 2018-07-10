@@ -82,6 +82,10 @@ module.exports = {
 			selector: '(//div[text()="HasCompetentAuthority"])[1]/../div[2]/div[1]/div[1]/div[text()="Spatial"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
 		},
+		ca_hasaddress: {
+			selector: '(//div[text()="HasCompetentAuthority"])[1]/../div[2]/div[1]/div[1]/div[text()="HasAddress"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
 		be_identifier: {
 			selector: '(//div[text()="IsGroupedBy: BusinessEvent"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
@@ -223,7 +227,7 @@ module.exports = {
 			locateStrategy: 'xpath'
 		},
 		ip_language: {
-			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Language"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Language"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
 		}
 	},
@@ -288,6 +292,9 @@ module.exports = {
 		},
 		assert_ca_spatial(value){
 			return this.assert.containsText('@ca_spatial', value);
+		},
+		assert_ca_hasaddress(value){
+			return this.assert.containsText('@ca_hasaddress', value);
 		},
 		assert_be_identifier(value){
 			return this.assert.containsText('@be_identifier', value);
@@ -368,10 +375,10 @@ module.exports = {
 			return this.assert.containsText('@pa_description_lang', value);
 		},
 		assert_pa_role(value){
-			return this.assert.containsText('@pa_description', value);
+			return this.assert.containsText('@pa_role', value);
 		},
 		assert_pa_role_lang(value){
-			return this.assert.containsText('@pa_description_lang', value);
+			return this.assert.containsText('@pa_role_lang', value);
 		},
 		assert_ip_identifier(value){
 			return this.assert.containsText('@ip_identifier', value);

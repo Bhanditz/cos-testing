@@ -105,6 +105,10 @@ module.exports = {
 			selector: '(//span[text()="HasCompetentAuthority"])[1]/../../div[2]/div[1]/div[3]/div[1]/span[text()="Spatial"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
+		ca_hasaddress: {
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "HasAddress"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
 		sector_click: {
 			selector: '//div[1]/span[1][text() = "Sector"]/../span[2]',
 			locateStrategy: 'xpath'
@@ -274,7 +278,7 @@ module.exports = {
 			locateStrategy: 'xpath'
 		},
 		ip_language: {
-			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Language"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Language"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		}
 	},
@@ -440,6 +444,12 @@ module.exports = {
 		},
 		assert_ca_spatial(value){
 			return this.assert.value('@ca_spatial', value);
+		},
+		set_ca_hasaddress(value) {
+			return this.setValue('@ca_hasaddress', value);
+		},
+		assert_ca_hasaddress(value){
+			return this.assert.value('@ca_hasaddress', value);
 		},
 		be_expand() {
 			this.api.execute(function(xpath) {
@@ -662,6 +672,12 @@ module.exports = {
 		},
 		assert_pa_role(value){
 			return this.assert.value('@pa_role', value);
+		},
+		set_pa_role_lang(value) {
+			return this.setValue('@pa_role_lang', value);
+		},
+		assert_pa_role_lang(value){
+			return this.assert.value('@pa_role_lang', value);
 		},
 		ip_expand() {
 			this.api.execute(function(xpath) {

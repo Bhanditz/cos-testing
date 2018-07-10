@@ -10,6 +10,6 @@
   </rdf:Description>
   <rdf:Description rdf:nodeID="testip">
     <rdf:type rdf:resource="http://data.europa.eu/m8g/Evidence"/>
-    <ns2:language rdf:resource="http://publications.europa.eu/resource/authority/language/ENG"/>
+    <ns2:language rdf:resource="http://publications.europa.eu/resource/authority/language/SQI"/>
   </rdf:Description>
 </rdf:RDF>

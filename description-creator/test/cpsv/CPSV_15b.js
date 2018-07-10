@@ -11,21 +11,12 @@ var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'u
 var download_folder = "downloads/";
 
 var time_pause = 1000;
-var enable_screenshot = false;
+var enable_screenshot = true;
 
-var nodeid = "testip";
+var nodeid = "testca";
 var entityid = nodeid;
-
-var language = util.getRandomLanguage();
-var lang_label = language.label;
-var lang_value = language.value;
-
-var def_language = util.getDefaultLanguage();
-var def_lang_label = def_language.label;
-var def_lang_value = def_language.value;
-
-console.log(lang_label + " **** " + lang_value);
-console.log(def_lang_label + " **** " + def_lang_value);
+var test = "test";
+var test_upload = "test2";
 
 module.exports = {
 	'@tags': ['CSPV'],
@@ -35,8 +26,7 @@ module.exports = {
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.ip_expand()
-			.set_ip_language(lang_label)
+			.set_ca_hasaddress(test)
 			.select();
 
 		if(enable_screenshot){
@@ -53,7 +43,8 @@ module.exports = {
 		}
 
 		presenter
-			.assert_ip_language(lang_label);
+			.assert_ca_hasaddress(test);
+
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -69,11 +60,11 @@ module.exports = {
 
 		browser
 			.pause(time_pause);
-
+		
 		rdfdata
-			.verify_textarea_nodeid(contents.replace(def_lang_value, lang_value), entityid, nodeid);
+			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test), entityid, nodeid);
 	},
-	
+
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
@@ -90,6 +81,7 @@ module.exports = {
 
 		rdfdata
 			.verify_textarea(contents);
+
 	},
 
 	'Upload appears in Presenter': function(browser) {
@@ -97,6 +89,8 @@ module.exports = {
 
 		presenter
 			.select();
+			
+		browser.pause(time_pause);
 
 		if(enable_screenshot){
 			browser
@@ -105,9 +99,9 @@ module.exports = {
 		}
 
 		presenter
-			.assert_ip_language(def_lang_label);
+			.assert_ca_hasaddress(test_upload);
 	},
-
+	
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
@@ -121,7 +115,7 @@ module.exports = {
 		}
 
 		editor
-			.assert_ip_language(def_lang_label);
+			.assert_ca_hasaddress(test_upload);
 	},
 
 	'Download in RDFData': function(browser) {

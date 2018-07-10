@@ -1,4 +1,5 @@
 var config = require('../../nightwatch.conf.js');
+var util = require('../../page-objects/utils/util.js');
 var fs = require('fs');
 var path = require('path');
 
@@ -6,12 +7,14 @@ var scriptName = path.basename(__filename, '.js');
 var testdata_filename = scriptName + '.rdf';
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var testdata_file = path.resolve(testdata_folder + testdata_filename);
-var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
+var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'utf8'});
 var download_folder = "downloads/";
 
 var time_pause = 1000;
-var enable_screenshot = false;
+var enable_screenshot = true;
 
+var nodeid = "testpr";
+var entityid = nodeid;
 var test = "test";
 var test_upload = "test2";
 
@@ -22,9 +25,7 @@ module.exports = {
 		var presenter = browser.page.Presenter();
 
 		editor.navigate()
-			.waitForElementVisible('body');
-
-		editor
+			.waitForElementVisible('body')
 			.pr_expand()
 			.set_pr_hasaddress(test)
 			.select();
@@ -60,9 +61,9 @@ module.exports = {
 
 		browser
 			.pause(time_pause);
-
+		
 		rdfdata
-			.verify_textarea(contents.replace(new RegExp( test_upload, 'g' ), test));
+			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test), entityid, nodeid);
 	},
 
 	'Uploading in RDFData': function(browser) {
@@ -89,6 +90,8 @@ module.exports = {
 
 		presenter
 			.select();
+			
+		browser.pause(time_pause);
 
 		if(enable_screenshot){
 			browser
