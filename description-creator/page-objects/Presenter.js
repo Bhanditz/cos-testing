@@ -229,6 +229,38 @@ module.exports = {
 		ip_language: {
 			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Language"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
+		},
+		ida_identifier: {
+			selector: '(//div[text()="IsDescribedAt"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_name: {
+			selector: '(//div[text()="IsDescribedAt"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		ida_name_lang: {
+			selector: '(//div[text()="IsDescribedAt"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		ida_landingpage: {
+			selector: '(//div[text()="IsDescribedAt"])[1]/../div[2]/div[1]/div[1]/div[text()="LandingPage"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		ida_landingpage_lang: {
+			selector: '(//div[text()="IsDescribedAt"])[1]/../div[2]/div[1]/div[1]/div[text()="LandingPage"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		hc_identifier: {
+			selector: '(//div[text()="HasCost"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_description: {
+			selector: '(//div[text()="HasCost"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		hc_description_lang: {
+			selector: '(//div[text()="HasCost"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -403,6 +435,30 @@ module.exports = {
 		},
 		assert_ip_language(value){
 			return this.assert.containsText('@ip_language', value);
+		},
+		assert_ida_identifier(value){
+			return this.assert.containsText('@ida_identifier', value);
+		},
+		assert_ida_name(value){
+			return this.assert.containsText('@ida_name', value);
+		},
+		assert_ida_name_lang(value){
+			return this.assert.containsText('@ida_name_lang', value);
+		},
+		assert_ida_landingpage(value){
+			return this.assert.containsText('@ida_landingpage', value);
+		},
+		assert_ida_landingpage_lang(value){
+			return this.assert.containsText('@ida_landingpage_lang', value);
+		},
+		assert_hc_identifier(value){
+			return this.assert.containsText('@hc_identifier', value);
+		},
+		assert_hc_description(value){
+			return this.assert.containsText('@hc_description', value);
+		},
+		assert_hc_description_lang(value){
+			return this.assert.containsText('@hc_description_lang', value);
 		}
 	}]
 };

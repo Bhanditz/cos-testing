@@ -6,6 +6,8 @@
 		{"value": "cr", "label": "hasCriterion"},
 		{"value": "pr", "label": "serviceProvider"},
 		{"value": "pa", "label": "hasParticipation"},
-		{"value": "ip", "label": "hasInput"}
+		{"value": "ip", "label": "hasInput"},
+		{"value": "ida", "label": "isDescribedAt"},
+		{"value": "hc", "label": "hasCost"}
 	]
 }
