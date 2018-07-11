@@ -280,6 +280,38 @@ module.exports = {
 		ip_language: {
 			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Language"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		ip_related: {
+			selector: '//div[1]/span[1][text() = "HasInput"]/../../div[2]/div[1]/div[6]/div[1]/span[1][text() = "RelatedDocumentation"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_click: {
+			selector: '(//span[text() = "HasFormalFramework"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		ff_identifier: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_name: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_name_lang: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_description: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_description_lang: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_type: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -738,6 +770,60 @@ module.exports = {
 		},
 		assert_ip_language(value){
 			return this.assert.value('@ip_language', value);
+		},
+		set_ip_related(value) {
+			return this.setValue('@ip_related', value);
+		},
+		assert_ip_related(value){
+			return this.assert.value('@ip_related', value);
+		},
+		ff_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.ff_click.selector]);
+			this.assert.visible('@ff_click');
+			this.click('@ff_click');
+			return this;
+		},
+		set_ff_identifier(value) {
+			return this.setValue('@ff_identifier', value);
+		},
+		assert_ff_identifier(value){
+			return this.assert.value('@ff_identifier', value);
+		},
+		set_ff_name(value) {
+			return this.setValue('@ff_name', value);
+		},
+		assert_ff_name(value){
+			return this.assert.value('@ff_name', value);
+		},
+		set_ff_name_lang(value) {
+			return this.setValue('@ff_name_lang', value);
+		},
+		assert_ff_name_lang(value){
+			return this.assert.value('@ff_name_lang', value);
+		},
+		set_ff_description(value) {
+			return this.setValue('@ff_description', value);
+		},
+		assert_ff_description(value){
+			return this.assert.value('@ff_description', value);
+		},
+		set_ff_description_lang(value) {
+			return this.setValue('@ff_description_lang', value);
+		},
+		assert_ff_description_lang(value){
+			return this.assert.value('@ff_description_lang', value);
+		},
+		set_ff_type(value) {
+			return this.setValue('@ff_type', value);
+		},
+		assert_ff_type(value){
+			return this.assert.value('@ff_type', value);
 		}
 	}]
 };

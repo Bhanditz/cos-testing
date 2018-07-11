@@ -229,6 +229,34 @@ module.exports = {
 		ip_language: {
 			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="Language"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
+		},
+		ip_related: {
+			selector: '(//div[text()="HasInput"])[1]/../div[2]/div[1]/div[1]/div[text()="RelatedDocumentation"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		ff_identifier: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_name: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		ff_name_lang: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Name"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		ff_description: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[not(contains(@class, "rformsLanguage"))]',
+			locateStrategy: 'xpath'
+		},
+		ff_description_lang: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Description"]/../div[2]/div[1]/div[contains(@class, "rformsLanguage")]',
+			locateStrategy: 'xpath'
+		},
+		ff_type: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
 		}
 	},
 
@@ -403,6 +431,27 @@ module.exports = {
 		},
 		assert_ip_language(value){
 			return this.assert.containsText('@ip_language', value);
+		},
+		assert_ip_related(value){
+			return this.assert.containsText('@ip_related', value);
+		},
+		assert_ff_identifier(value){
+			return this.assert.containsText('@ff_identifier', value);
+		},
+		assert_ff_name(value){
+			return this.assert.containsText('@ff_name', value);
+		},
+		assert_ff_name_lang(value){
+			return this.assert.containsText('@ff_name_lang', value);
+		},
+		assert_ff_description(value){
+			return this.assert.containsText('@ff_description', value);
+		},
+		assert_ff_description_lang(value){
+			return this.assert.containsText('@ff_description_lang', value);
+		},
+		assert_ff_type(value){
+			return this.assert.containsText('@ff_type', value);
 		}
 	}]
 };
