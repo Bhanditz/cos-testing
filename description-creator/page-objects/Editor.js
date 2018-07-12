@@ -312,6 +312,54 @@ module.exports = {
 		ff_type: {
 			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
+		},
+		ida_click: {
+			selector: '(//span[text() = "IsDescribedAt"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		ida_identifier: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_name: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_name_lang: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_landingpage: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "LandingPage"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_landingpage_lang: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "LandingPage"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_click: {
+			selector: '(//span[text() = "HasCost"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		hc_identifier: {
+			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_description: {
+			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_description_lang: {
+			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_value: {
+			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Value"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hc_currency: {
+			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Currency"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
 		}
 	},
 	
@@ -824,6 +872,78 @@ module.exports = {
 		},
 		assert_ff_type(value){
 			return this.assert.value('@ff_type', value);
+		},
+		set_ida_identifier(value) {
+			return this.setValue('@ida_identifier', value);
+		},
+		assert_ida_identifier(value){
+			return this.assert.value('@ida_identifier', value);
+		},
+		set_ida_name(value) {
+			return this.setValue('@ida_name', value);
+		},
+		assert_ida_name(value){
+			return this.assert.value('@ida_name', value);
+		},
+		set_ida_name_lang(value) {
+			return this.setValue('@ida_name_lang', value);
+		},
+		assert_ida_name_lang(value){
+			return this.assert.value('@ida_name_lang', value);
+		},
+		set_ida_landingpage(value) {
+			return this.setValue('@ida_landingpage', value);
+		},
+		assert_ida_landingpage(value){
+			return this.assert.value('@ida_landingpage', value);
+		},
+		set_ida_landingpage_lang(value) {
+			return this.setValue('@ida_landingpage_lang', value);
+		},
+		assert_ida_landingpage_lang(value){
+			return this.assert.value('@ida_landingpage_lang', value);
+		},
+		hc_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.hc_click.selector]);
+			this.assert.visible('@hc_click');
+			this.click('@hc_click');
+			return this;
+		},
+		set_hc_identifier(value) {
+			return this.setValue('@hc_identifier', value);
+		},
+		assert_hc_identifier(value){
+			return this.assert.value('@hc_identifier', value);
+		},
+		set_hc_description(value) {
+			return this.setValue('@hc_description', value);
+		},
+		assert_hc_description(value){
+			return this.assert.value('@hc_description', value);
+		},
+		set_hc_description_lang(value) {
+			return this.setValue('@hc_description_lang', value);
+		},
+		assert_hc_description_lang(value){
+			return this.assert.value('@hc_description_lang', value);
+		},
+		set_hc_value(value) {
+			return this.setValue('@hc_value', value);
+		},
+		assert_hc_value(value){
+			return this.assert.value('@hc_value', value);
+		},
+		set_hc_currency(value) {
+			return this.setValue('@hc_currency', value);
+		},
+		assert_hc_currency(value){
+			return this.assert.value('@hc_currency', value);
 		}
 	}]
 };
