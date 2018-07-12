@@ -1,5 +1,4 @@
 var config = require('../../nightwatch.conf.js');
-var util = require('../../page-objects/utils/util.js');
 var fs = require('fs');
 var path = require('path');
 
@@ -7,14 +6,12 @@ var scriptName = path.basename(__filename, '.js');
 var testdata_filename = scriptName + '.rdf';
 var testdata_folder = __dirname + '..\\..\\..\\test-data\\';
 var testdata_file = path.resolve(testdata_folder + testdata_filename);
-var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'utf8'});
+var contents = fs.readFileSync('test-data/'+scriptName+'.rdf', { 'encoding': 'utf8'});
 var download_folder = "downloads/";
 
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var nodeid = "testhc";
-var entityid = nodeid;
 var test = "test";
 var test_upload = "test2";
 
@@ -25,9 +22,11 @@ module.exports = {
 		var presenter = browser.page.Presenter();
 
 		editor.navigate()
-			.waitForElementVisible('body')
-			.hc_expand()
-			.set_hc_value(test)
+			.waitForElementVisible('body');
+
+		editor
+			.hch_expand()
+			.set_hch_identifier(test)
 			.select();
 
 		if(enable_screenshot){
@@ -44,7 +43,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test);
+			.assert_hch_identifier(test);
 
 	},
 
@@ -61,9 +60,9 @@ module.exports = {
 
 		browser
 			.pause(time_pause);
-		
+
 		rdfdata
-			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test), entityid, nodeid);
+			.verify_textarea(contents.replace(new RegExp( test_upload, 'g' ), test));
 	},
 
 	'Uploading in RDFData': function(browser) {
@@ -90,8 +89,6 @@ module.exports = {
 
 		presenter
 			.select();
-			
-		browser.pause(time_pause);
 
 		if(enable_screenshot){
 			browser
@@ -100,7 +97,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test_upload);
+			.assert_hch_identifier(test_upload);
 	},
 	
 	'Upload appears in Editor': function(browser) {
@@ -116,7 +113,7 @@ module.exports = {
 		}
 
 		editor
-			.assert_hc_value(test_upload);
+			.assert_hch_identifier(test_upload);
 	},
 
 	'Download in RDFData': function(browser) {

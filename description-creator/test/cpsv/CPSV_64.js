@@ -13,7 +13,7 @@ var download_folder = "downloads/";
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var nodeid = "testhc";
+var nodeid = "testhch";
 var entityid = nodeid;
 var test = "test";
 var test_upload = "test2";
@@ -26,8 +26,8 @@ module.exports = {
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.hc_expand()
-			.set_hc_value(test)
+			.hch_expand()
+			.set_hch_openinghours(test)
 			.select();
 
 		if(enable_screenshot){
@@ -44,7 +44,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test);
+			.assert_hch_openinghours(test);
 
 	},
 
@@ -100,7 +100,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test_upload);
+			.assert_hch_openinghours(test_upload);
 	},
 	
 	'Upload appears in Editor': function(browser) {
@@ -116,7 +116,7 @@ module.exports = {
 		}
 
 		editor
-			.assert_hc_value(test_upload);
+			.assert_hch_openinghours(test_upload);
 	},
 
 	'Download in RDFData': function(browser) {

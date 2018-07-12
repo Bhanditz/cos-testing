@@ -9,6 +9,7 @@ var spatials = codelist.templates[0].content[8].choices;
 var betypes = codelist.templates[14].content[0].choices;
 var letypes = codelist.templates[15].content[0].choices;
 var fftypes = codelist.templates[8].content[3].choices;
+var hchtypes = codelist.templates[3].content[1].choices;
 var hccurrencies = codelist.templates[2].content[3].choices;
 
 module.exports = { 
@@ -144,12 +145,20 @@ module.exports = {
 		var type = fftypes[Math.floor(Math.random() * fftypes.length)];
 		return type;
 	},
+	getDefaultHCHType: function() {
+		var def_type = hchtypes.find(o => o.label === 'Assistant');
+		return def_type;
+	},
+	getRandomHCHType: function() {
+		var type = hchtypes[Math.floor(Math.random() * hchtypes.length)];
+		return type;
+	},
 	getDefaultHCCurrency: function() {
 		var def_type = hccurrencies.find(o => o.label === 'ALL-Lek (pl. Leks)');
 		return def_type;
 	},
 	getRandomHCCurrency: function() {
-		var type = hccurrencies[Math.floor(Math.random() * letypes.length)];
+		var type = hccurrencies[Math.floor(Math.random() * hccurrencies.length)];
 		return type;
 	}
 };

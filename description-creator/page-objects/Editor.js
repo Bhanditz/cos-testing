@@ -93,12 +93,20 @@ module.exports = {
 			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
 			locateStrategy: 'xpath'
 		},
+		ca_name: {
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ca_name_lang: {
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
 		ca_preferredlabel: {
-			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "PreferredLabel"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "PreferredLabel"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
 			locateStrategy: 'xpath'
 		},
 		ca_preferredlabel_lang: {
-			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "PreferredLabel"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "PreferredLabel"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
 		ca_spatial: {
@@ -313,28 +321,20 @@ module.exports = {
 			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
-		ida_click: {
-			selector: '(//span[text() = "IsDescribedAt"])[1]/../span[2]',
+		hch_click: {
+			selector: '(//span[text() = "HasChannel"])[1]/../span[2]',
 			locateStrategy: 'xpath'
 		},
-		ida_identifier: {
-			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+		hch_identifier: {
+			selector: '//div[1]/span[1][text() = "HasChannel"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
 			locateStrategy: 'xpath'
 		},
-		ida_name: {
-			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+		hch_type: {
+			selector: '//div[1]/span[1][text() = "HasChannel"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
-		ida_name_lang: {
-			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
-			locateStrategy: 'xpath'
-		},
-		ida_landingpage: {
-			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "LandingPage"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
-			locateStrategy: 'xpath'
-		},
-		ida_landingpage_lang: {
-			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "LandingPage"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+		hch_openinghours: {
+			selector: '//div[1]/span[1][text() = "HasChannel"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "OpeningHours"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
 			locateStrategy: 'xpath'
 		},
 		hc_click: {
@@ -359,6 +359,30 @@ module.exports = {
 		},
 		hc_currency: {
 			selector: '//div[1]/span[1][text() = "HasCost"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Currency"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_click: {
+			selector: '(//span[text() = "IsDescribedAt"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		ida_identifier: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_name: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_name_lang: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_landingpage: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "LandingPage"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ida_landingpage_lang: {
+			selector: '//div[1]/span[1][text() = "IsDescribedAt"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "LandingPage"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		}
 	},
@@ -506,6 +530,18 @@ module.exports = {
 		},
 		assert_ca_identifier(value){
 			return this.assert.value('@ca_identifier', value);
+		},
+		set_ca_name(value) {
+			return this.setValue('@ca_name', value);
+		},
+		assert_ca_name(value){
+			return this.assert.value('@ca_name', value);
+		},
+		set_ca_name_lang(value) {
+			return this.setValue('@ca_name_lang', value);
+		},
+		assert_ca_name_lang(value){
+			return this.assert.value('@ca_name_lang', value);
 		},
 		set_ca_preferredlabel(value) {
 			return this.setValue('@ca_preferredlabel', value);
@@ -873,47 +909,35 @@ module.exports = {
 		assert_ff_type(value){
 			return this.assert.value('@ff_type', value);
 		},
-		ida_expand() {
+		hch_expand() {
 			this.api.execute(function(xpath) {
 				function getElementByXpath(path) {
 					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 				}
 				var res = getElementByXpath(xpath);
 				res.scrollIntoView(true);
-			}, [this.elements.ida_click.selector]);
-			this.assert.visible('@ida_click');
-			this.click('@ida_click');
+			}, [this.elements.hch_click.selector]);
+			this.assert.visible('@hch_click');
+			this.click('@hch_click');
 			return this;
 		},
-		set_ida_identifier(value) {
-			return this.setValue('@ida_identifier', value);
+		set_hch_identifier(value) {
+			return this.setValue('@hch_identifier', value);
 		},
-		assert_ida_identifier(value){
-			return this.assert.value('@ida_identifier', value);
+		assert_hch_identifier(value){
+			return this.assert.value('@hch_identifier', value);
 		},
-		set_ida_name(value) {
-			return this.setValue('@ida_name', value);
+		set_hch_type(value) {
+			return this.setValue('@hch_type', value);
 		},
-		assert_ida_name(value){
-			return this.assert.value('@ida_name', value);
+		assert_hch_type(value){
+			return this.assert.value('@hch_type', value);
 		},
-		set_ida_name_lang(value) {
-			return this.setValue('@ida_name_lang', value);
+		set_hch_openinghours(value) {
+			return this.setValue('@hch_openinghours', value);
 		},
-		assert_ida_name_lang(value){
-			return this.assert.value('@ida_name_lang', value);
-		},
-		set_ida_landingpage(value) {
-			return this.setValue('@ida_landingpage', value);
-		},
-		assert_ida_landingpage(value){
-			return this.assert.value('@ida_landingpage', value);
-		},
-		set_ida_landingpage_lang(value) {
-			return this.setValue('@ida_landingpage_lang', value);
-		},
-		assert_ida_landingpage_lang(value){
-			return this.assert.value('@ida_landingpage_lang', value);
+		assert_hch_openinghours(value){
+			return this.assert.value('@hch_openinghours', value);
 		},
 		hc_expand() {
 			this.api.execute(function(xpath) {
@@ -956,6 +980,48 @@ module.exports = {
 		},
 		assert_hc_currency(value){
 			return this.assert.value('@hc_currency', value);
+		},
+		ida_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.ida_click.selector]);
+			this.assert.visible('@ida_click');
+			this.click('@ida_click');
+			return this;
+		},
+		set_ida_identifier(value) {
+			return this.setValue('@ida_identifier', value);
+		},
+		assert_ida_identifier(value){
+			return this.assert.value('@ida_identifier', value);
+		},
+		set_ida_name(value) {
+			return this.setValue('@ida_name', value);
+		},
+		assert_ida_name(value){
+			return this.assert.value('@ida_name', value);
+		},
+		set_ida_name_lang(value) {
+			return this.setValue('@ida_name_lang', value);
+		},
+		assert_ida_name_lang(value){
+			return this.assert.value('@ida_name_lang', value);
+		},
+		set_ida_landingpage(value) {
+			return this.setValue('@ida_landingpage', value);
+		},
+		assert_ida_landingpage(value){
+			return this.assert.value('@ida_landingpage', value);
+		},
+		set_ida_landingpage_lang(value) {
+			return this.setValue('@ida_landingpage_lang', value);
+		},
+		assert_ida_landingpage_lang(value){
+			return this.assert.value('@ida_landingpage_lang', value);
 		}
 	}]
 };

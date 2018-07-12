@@ -9,6 +9,8 @@
 		{"value": "ip", "label": "hasInput"},
 		{"value": "ff", "label": "hasFormalFramework"},
 		{"value": "ida", "label": "isDescribedAt"},
-		{"value": "hc", "label": "hasCost"}
+		{"value": "hc", "label": "hasCost"},
+		{"value": "hch", "label": "hasChannel"},
+		{"value": "hcp", "label": "hasContactPoint"}
 	]
 }

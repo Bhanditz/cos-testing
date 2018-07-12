@@ -13,10 +13,22 @@ var download_folder = "downloads/";
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var nodeid = "testhc";
+var nodeid = "testca";
 var entityid = nodeid;
 var test = "test";
 var test_upload = "test2";
+
+var language = util.getRandomLanguageAttribute();
+var lang_label = language.label.en;
+var lang_value = language.value;
+var lang_string = 'xml:lang="' + lang_value + '"';
+
+var def_language = util.getDefaultLanguageAttribute();
+var def_lang_label = def_language.label.en;
+var def_lang_value = def_language.value;
+var def_lang_string = 'xml:lang="' + def_lang_value + '"';
+
+console.log(lang_label + " **** " + lang_value);
 
 module.exports = {
 	'@tags': ['CSPV'],
@@ -26,8 +38,8 @@ module.exports = {
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.hc_expand()
-			.set_hc_value(test)
+			.set_ca_name(test)
+			.set_ca_name_lang(lang_label)
 			.select();
 
 		if(enable_screenshot){
@@ -44,7 +56,8 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test);
+			.assert_ca_name(test)
+			.assert_ca_name_lang(lang_value);
 
 	},
 
@@ -61,9 +74,9 @@ module.exports = {
 
 		browser
 			.pause(time_pause);
-		
+
 		rdfdata
-			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test), entityid, nodeid);
+			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test).replace(def_lang_string , lang_string), entityid, nodeid);
 	},
 
 	'Uploading in RDFData': function(browser) {
@@ -90,8 +103,6 @@ module.exports = {
 
 		presenter
 			.select();
-			
-		browser.pause(time_pause);
 
 		if(enable_screenshot){
 			browser
@@ -100,9 +111,10 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test_upload);
+			.assert_ca_name(test_upload)
+			.assert_ca_name_lang(def_lang_value);
 	},
-	
+
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
@@ -116,7 +128,8 @@ module.exports = {
 		}
 
 		editor
-			.assert_hc_value(test_upload);
+			.assert_ca_name(test_upload)
+			.assert_ca_name_lang(def_lang_label);
 	},
 
 	'Download in RDFData': function(browser) {

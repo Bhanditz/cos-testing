@@ -13,10 +13,19 @@ var download_folder = "downloads/";
 var time_pause = 1000;
 var enable_screenshot = false;
 
-var nodeid = "testhc";
+var nodeid = "testhch";
 var entityid = nodeid;
-var test = "test";
-var test_upload = "test2";
+
+var type = util.getRandomHCHType();
+var type_label = type.label;
+var type_value = util.escapeSpecialChars(type.value);
+
+var def_type = util.getDefaultHCHType();
+var def_type_label = def_type.label;
+var def_type_value = util.escapeSpecialChars(def_type.value);
+
+console.log(type_label + " **** " + type_value);
+console.log(def_type_label + " **** " + def_type_value);
 
 module.exports = {
 	'@tags': ['CSPV'],
@@ -26,8 +35,8 @@ module.exports = {
 
 		editor.navigate()
 			.waitForElementVisible('body')
-			.hc_expand()
-			.set_hc_value(test)
+			.hch_expand()
+			.set_hch_type(type_label)
 			.select();
 
 		if(enable_screenshot){
@@ -44,8 +53,7 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test);
-
+			.assert_hch_type(type_label);
 	},
 
 	'Field appears in RDFData': function(browser) {
@@ -61,11 +69,11 @@ module.exports = {
 
 		browser
 			.pause(time_pause);
-		
-		rdfdata
-			.verify_textarea_nodeid(contents.replace(new RegExp( test_upload, 'g' ), test), entityid, nodeid);
-	},
 
+		rdfdata
+			.verify_textarea_nodeid(contents.replace(def_type_value, type_value), entityid, nodeid);
+	},
+	
 	'Uploading in RDFData': function(browser) {
 		var rdfdata = browser.page.RDFData();
 
@@ -82,7 +90,6 @@ module.exports = {
 
 		rdfdata
 			.verify_textarea(contents);
-
 	},
 
 	'Upload appears in Presenter': function(browser) {
@@ -90,8 +97,6 @@ module.exports = {
 
 		presenter
 			.select();
-			
-		browser.pause(time_pause);
 
 		if(enable_screenshot){
 			browser
@@ -100,9 +105,9 @@ module.exports = {
 		}
 
 		presenter
-			.assert_hc_value(test_upload);
+			.assert_hch_type(def_type_label);
 	},
-	
+
 	'Upload appears in Editor': function(browser) {
 		var editor = browser.page.Editor();
 
@@ -116,7 +121,7 @@ module.exports = {
 		}
 
 		editor
-			.assert_hc_value(test_upload);
+			.assert_hch_type(def_type_label);
 	},
 
 	'Download in RDFData': function(browser) {
