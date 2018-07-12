@@ -11,6 +11,7 @@ var letypes = codelist.templates[15].content[0].choices;
 var fftypes = codelist.templates[8].content[3].choices;
 var hchtypes = codelist.templates[3].content[1].choices;
 var hccurrencies = codelist.templates[2].content[3].choices;
+var prodtypes = codelist.templates[7].content[3].choices;
 
 module.exports = { 
 	escapeSpecialChars : function(string) {
@@ -143,6 +144,14 @@ module.exports = {
 	},
 	getRandomFFType: function() {
 		var type = fftypes[Math.floor(Math.random() * fftypes.length)];
+		return type;
+	},
+	getDefaultPRODType: function() {
+		var def_type = prodtypes.find(o => o.label === 'Code');
+		return def_type;
+	},
+	getRandomPRODType: function() {
+		var type = prodtypes[Math.floor(Math.random() * prodtypes.length)];
 		return type;
 	},
 	getDefaultHCHType: function() {

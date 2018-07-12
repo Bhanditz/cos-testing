@@ -321,6 +321,70 @@ module.exports = {
 			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
+		prod_click: {
+			selector: '(//span[text() = "Produces"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		prod_identifier: {
+			selector: '//div[1]/span[1][text() = "Produces"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		prod_name: {
+			selector: '//div[1]/span[1][text() = "Produces"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		prod_name_lang: {
+			selector: '//div[1]/span[1][text() = "Produces"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		prod_description: {
+			selector: '//div[1]/span[1][text() = "Produces"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		prod_description_lang: {
+			selector: '//div[1]/span[1][text() = "Produces"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		prod_type: {
+			selector: '//div[1]/span[1][text() = "Produces"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_click: {
+			selector: '(//span[text() = "Follows"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		fo_identifier: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_name: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_name_lang: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "Name"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_description: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_description_lang: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "Description"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_type: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_type_lang: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[1]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		fo_language: {
+			selector: '//div[1]/span[1][text() = "Follows"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Language"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
 		hcp_click: {
 			selector: '(//span[text() = "HasContactPoint"])[1]/../span[2]',
 			locateStrategy: 'xpath'
@@ -928,6 +992,114 @@ module.exports = {
 		},
 		assert_ff_type(value){
 			return this.assert.value('@ff_type', value);
+		},
+		prod_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.prod_click.selector]);
+			this.assert.visible('@prod_click');
+			this.click('@prod_click');
+			return this;
+		},
+		set_prod_identifier(value) {
+			return this.setValue('@prod_identifier', value);
+		},
+		assert_prod_identifier(value){
+			return this.assert.value('@prod_identifier', value);
+		},
+		set_prod_name(value) {
+			return this.setValue('@prod_name', value);
+		},
+		assert_prod_name(value){
+			return this.assert.value('@prod_name', value);
+		},
+		set_prod_name_lang(value) {
+			return this.setValue('@prod_name_lang', value);
+		},
+		assert_prod_name_lang(value){
+			return this.assert.value('@prod_name_lang', value);
+		},
+		set_prod_description(value) {
+			return this.setValue('@prod_description', value);
+		},
+		assert_prod_description(value){
+			return this.assert.value('@prod_description', value);
+		},
+		set_prod_description_lang(value) {
+			return this.setValue('@prod_description_lang', value);
+		},
+		assert_prod_description_lang(value){
+			return this.assert.value('@prod_description_lang', value);
+		},
+		set_prod_type(value) {
+			return this.setValue('@prod_type', value);
+		},
+		assert_prod_type(value){
+			return this.assert.value('@prod_type', value);
+		},
+		fo_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.fo_click.selector]);
+			this.assert.visible('@fo_click');
+			this.click('@fo_click');
+			return this;
+		},
+		set_fo_identifier(value) {
+			return this.setValue('@fo_identifier', value);
+		},
+		assert_fo_identifier(value){
+			return this.assert.value('@fo_identifier', value);
+		},
+		set_fo_name(value) {
+			return this.setValue('@fo_name', value);
+		},
+		assert_fo_name(value){
+			return this.assert.value('@fo_name', value);
+		},
+		set_fo_name_lang(value) {
+			return this.setValue('@fo_name_lang', value);
+		},
+		assert_fo_name_lang(value){
+			return this.assert.value('@fo_name_lang', value);
+		},
+		set_fo_description(value) {
+			return this.setValue('@fo_description', value);
+		},
+		assert_fo_description(value){
+			return this.assert.value('@fo_description', value);
+		},
+		set_fo_description_lang(value) {
+			return this.setValue('@fo_description_lang', value);
+		},
+		assert_fo_description_lang(value){
+			return this.assert.value('@fo_description_lang', value);
+		},
+		set_fo_type(value) {
+			return this.setValue('@fo_type', value);
+		},
+		assert_fo_type(value){
+			return this.assert.value('@fo_type', value);
+		},
+		set_fo_type_lang(value) {
+			return this.setValue('@fo_type_lang', value);
+		},
+		assert_fo_type_lang(value){
+			return this.assert.value('@fo_type_lang', value);
+		},
+		set_fo_language(value) {
+			return this.setValue('@fo_language', value);
+		},
+		assert_fo_language(value){
+			return this.assert.value('@fo_language', value);
 		},
 		hcp_expand() {
 			this.api.execute(function(xpath) {

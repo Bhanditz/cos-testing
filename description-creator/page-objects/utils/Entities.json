@@ -11,6 +11,8 @@
 		{"value": "ida", "label": "isDescribedAt"},
 		{"value": "hc", "label": "hasCost"},
 		{"value": "hch", "label": "hasChannel"},
-		{"value": "hcp", "label": "hasContactPoint"}
+		{"value": "hcp", "label": "hasContactPoint"},
+		{"value": "fo", "label": "follows"},
+		{"value": "prod", "label": "produces"}
 	]
 }
