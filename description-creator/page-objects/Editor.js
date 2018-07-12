@@ -321,6 +321,14 @@ module.exports = {
 			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
+		ff_language: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[5]/div[1]/span[1][text() = "Language"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_status: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[6]/div[1]/span[1][text() = "Status"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
 		hcp_click: {
 			selector: '(//span[text() = "HasContactPoint"])[1]/../span[2]',
 			locateStrategy: 'xpath'
@@ -928,6 +936,18 @@ module.exports = {
 		},
 		assert_ff_type(value){
 			return this.assert.value('@ff_type', value);
+		},
+		set_ff_language(value) {
+			return this.setValue('@ff_language', value);
+		},
+		assert_ff_language(value){
+			return this.assert.value('@ff_language', value);
+		},
+		set_ff_status(value) {
+			return this.setValue('@ff_status', value);
+		},
+		assert_ff_status(value){
+			return this.assert.value('@ff_status', value);
 		},
 		hcp_expand() {
 			this.api.execute(function(xpath) {
