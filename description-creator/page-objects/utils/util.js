@@ -9,6 +9,7 @@ var spatials = codelist.templates[0].content[8].choices;
 var betypes = codelist.templates[14].content[0].choices;
 var letypes = codelist.templates[15].content[0].choices;
 var fftypes = codelist.templates[8].content[3].choices;
+var ffstatuses = codelist.templates[8].content[5].choices;
 var hchtypes = codelist.templates[3].content[1].choices;
 var hccurrencies = codelist.templates[2].content[3].choices;
 var prodtypes = codelist.templates[7].content[3].choices;
@@ -145,6 +146,14 @@ module.exports = {
 	getRandomFFType: function() {
 		var type = fftypes[Math.floor(Math.random() * fftypes.length)];
 		return type;
+	},
+	getDefaultFFStatus: function() {
+		var def_status = ffstatuses.find(o => o.label === 'Expired');
+		return def_status;
+	},
+	getRandomFFStatus: function() {
+		var status = ffstatuses[Math.floor(Math.random() * ffstatuses.length)];
+		return status;
 	},
 	getDefaultPRODType: function() {
 		var def_type = prodtypes.find(o => o.label === 'Code');
