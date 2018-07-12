@@ -110,7 +110,7 @@ module.exports = {
 			locateStrategy: 'xpath'
 		},
 		ca_spatial: {
-			selector: '(//span[text()="HasCompetentAuthority"])[1]/../../div[2]/div[1]/div[3]/div[1]/span[text()="Spatial"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			selector: '//div[1]/span[1][text() = "HasCompetentAuthority"]/../../div[2]/div[1]/div[4]/div[1]/span[text()="Spatial"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
 		ca_hasaddress: {

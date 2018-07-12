@@ -11,7 +11,7 @@ var contents = fs.readFileSync('test-data/'+ testdata_filename, { 'encoding': 'u
 var download_folder = "downloads/";
 
 var time_pause = 1000;
-var enable_screenshot = true;
+var enable_screenshot = false;
 
 var nodeid = "testca";
 var entityid = nodeid;
