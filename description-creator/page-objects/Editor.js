@@ -321,6 +321,26 @@ module.exports = {
 			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "Type"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
+		hcp_click: {
+			selector: '(//span[text() = "HasContactPoint"])[1]/../span[2]',
+			locateStrategy: 'xpath'
+		},
+		hcp_identifier: {
+			selector: '//div[1]/span[1][text() = "HasContactPoint"]/../../div[2]/div[1]/div[1]/div[1]/span[1][text() = "Identifier"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hcp_hasemail: {
+			selector: '//div[1]/span[1][text() = "HasContactPoint"]/../../div[2]/div[1]/div[2]/div[1]/span[1][text() = "HasEmail"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hcp_hastelephone: {
+			selector: '//div[1]/span[1][text() = "HasContactPoint"]/../../div[2]/div[1]/div[3]/div[1]/span[1][text() = "HasTelephone"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		hcp_openinghours: {
+			selector: '//div[1]/span[1][text() = "HasContactPoint"]/../../div[2]/div[1]/div[4]/div[1]/span[1][text() = "OpeningHours"]/../../div[2]/div[1]/div[2]/div[1]/input[1]',
+			locateStrategy: 'xpath'
+		},
 		hch_click: {
 			selector: '(//span[text() = "HasChannel"])[1]/../span[2]',
 			locateStrategy: 'xpath'
@@ -908,6 +928,42 @@ module.exports = {
 		},
 		assert_ff_type(value){
 			return this.assert.value('@ff_type', value);
+		},
+		hcp_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.hcp_click.selector]);
+			this.assert.visible('@hcp_click');
+			this.click('@hcp_click');
+			return this;
+		},
+		set_hcp_identifier(value) {
+			return this.setValue('@hcp_identifier', value);
+		},
+		assert_hcp_identifier(value){
+			return this.assert.value('@hcp_identifier', value);
+		},
+		set_hcp_hasemail(value) {
+			return this.setValue('@hcp_hasemail', value);
+		},
+		assert_hcp_hasemail(value){
+			return this.assert.value('@hcp_hasemail', value);
+		},
+		set_hcp_hastelephone(value) {
+			return this.setValue('@hcp_hastelephone', value);
+		},
+		assert_hcp_hastelephone(value){
+			return this.assert.value('@hcp_hastelephone', value);
+		},
+		set_hcp_openinghours(value) {
+			return this.setValue('@hcp_openinghours', value);
+		},
+		assert_hcp_openinghours(value){
+			return this.assert.value('@hcp_openinghours', value);
 		},
 		hch_expand() {
 			this.api.execute(function(xpath) {

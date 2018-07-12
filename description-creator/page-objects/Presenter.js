@@ -266,6 +266,22 @@ module.exports = {
 			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Type"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
 		},
+		hcp_identifier: {
+			selector: '(//div[text()="HasContactPoint"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		hcp_hasemail: {
+			selector: '(//div[text()="HasContactPoint"])[1]/../div[2]/div[1]/div[1]/div[text()="HasEmail"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		hcp_hastelephone: {
+			selector: '(//div[text()="HasContactPoint"])[1]/../div[2]/div[1]/div[1]/div[text()="HasTelephone"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
+		hcp_openinghours: {
+			selector: '(//div[text()="HasContactPoint"])[1]/../div[2]/div[1]/div[1]/div[text()="OpeningHours"]/../div[2]/div[1]/div[1]',
+			locateStrategy: 'xpath'
+		},
 		hch_identifier: {
 			selector: '(//div[text()="HasChannel"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
@@ -518,6 +534,18 @@ module.exports = {
 		},
 		assert_ff_type(value){
 			return this.assert.containsText('@ff_type', value);
+		},
+		assert_hcp_identifier(value){
+			return this.assert.containsText('@hcp_identifier', value);
+		},
+		assert_hcp_hasemail(value){
+			return this.assert.containsText('@hcp_hasemail', value);
+		},
+		assert_hcp_hastelephone(value){
+			return this.assert.containsText('@hcp_hastelephone', value);
+		},
+		assert_hcp_openinghours(value){
+			return this.assert.containsText('@hcp_openinghours', value);
 		},
 		assert_hch_identifier(value){
 			return this.assert.containsText('@hch_identifier', value);
