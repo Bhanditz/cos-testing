@@ -873,6 +873,18 @@ module.exports = {
 		assert_ff_type(value){
 			return this.assert.value('@ff_type', value);
 		},
+		ida_expand() {
+			this.api.execute(function(xpath) {
+				function getElementByXpath(path) {
+					return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
+				var res = getElementByXpath(xpath);
+				res.scrollIntoView(true);
+			}, [this.elements.ida_click.selector]);
+			this.assert.visible('@ida_click');
+			this.click('@ida_click');
+			return this;
+		},
 		set_ida_identifier(value) {
 			return this.setValue('@ida_identifier', value);
 		},
