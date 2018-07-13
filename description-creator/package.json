@@ -13,7 +13,7 @@
     "upload": "node test/e2e/upload_screenshots_to_s3.js",
     "e2e": "npm run sauce; npm run upload",
     "dev": "nodemon -w test/index.html --delay 250ms --exec 'npm run upload'",
-    "nightwatch": "nightwatch --env local test/cpsv/CPSV_22.js",
+    "nightwatch": "nightwatch --env local",
     "clean:reports": "rimraf reports/*",
     "clean:screenshots": "rimraf screenshots/*",
     "clean:downloads": "rimraf downloads/*",
