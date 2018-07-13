@@ -329,6 +329,14 @@ module.exports = {
 			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[6]/div[1]/span[1][text() = "Status"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
 			locateStrategy: 'xpath'
 		},
+		ff_subject: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[7]/div[1]/span[1][text() = "Subject"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
+		ff_application: {
+			selector: '//div[1]/span[1][text() = "HasFormalFramework"]/../../div[2]/div[1]/div[8]/div[1]/span[1][text() = "TerritorialApplication"]/../../div[2]/div[1]/div[2]/div[1]/div[3]/input[1]',
+			locateStrategy: 'xpath'
+		},
 		prod_click: {
 			selector: '(//span[text() = "Produces"])[1]/../span[2]',
 			locateStrategy: 'xpath'
@@ -1012,6 +1020,18 @@ module.exports = {
 		},
 		assert_ff_status(value){
 			return this.assert.value('@ff_status', value);
+		},
+		set_ff_subject(value) {
+			return this.setValue('@ff_subject', value);
+		},
+		assert_ff_subject(value){
+			return this.assert.value('@ff_subject', value);
+		},
+		set_ff_application(value) {
+			return this.setValue('@ff_application', value);
+		},
+		assert_ff_application(value){
+			return this.assert.value('@ff_application', value);
 		},
 		prod_expand() {
 			this.api.execute(function(xpath) {

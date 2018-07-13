@@ -10,6 +10,8 @@ var betypes = codelist.templates[14].content[0].choices;
 var letypes = codelist.templates[15].content[0].choices;
 var fftypes = codelist.templates[8].content[3].choices;
 var ffstatuses = codelist.templates[8].content[5].choices;
+var ffsubjects = codelist.templates[8].content[6].choices;
+var ffapplications = codelist.templates[8].content[7].choices;
 var hchtypes = codelist.templates[3].content[1].choices;
 var hccurrencies = codelist.templates[2].content[3].choices;
 var prodtypes = codelist.templates[7].content[3].choices;
@@ -154,6 +156,22 @@ module.exports = {
 	getRandomFFStatus: function() {
 		var status = ffstatuses[Math.floor(Math.random() * ffstatuses.length)];
 		return status;
+	},
+	getDefaultFFSubject: function() {
+		var def_subject = ffsubjects.find(o => o.label === 'AGRI-FOODSTUFFS');
+		return def_subject;
+	},
+	getRandomFFSubject: function() {
+		var subject = ffsubjects[Math.floor(Math.random() * ffsubjects.length)];
+		return subject;
+	},
+	getDefaultFFApplication: function() {
+		var def_application = ffapplications.find(o => o.label === 'AT - ÖSTERREICH');
+		return def_application;
+	},
+	getRandomFFApplication: function() {
+		var application = ffapplications[Math.floor(Math.random() * ffapplications.length)];
+		return application;
 	},
 	getDefaultPRODType: function() {
 		var def_type = prodtypes.find(o => o.label === 'Code');

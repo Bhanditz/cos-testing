@@ -274,6 +274,14 @@ module.exports = {
 			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Status"]/../div[2]/div[1]/a',
 			locateStrategy: 'xpath'
 		},
+		ff_subject: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="Subject"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
+		ff_application: {
+			selector: '(//div[text()="HasFormalFramework"])[1]/../div[2]/div[1]/div[1]/div[text()="TerritorialApplication"]/../div[2]/div[1]/a',
+			locateStrategy: 'xpath'
+		},
 		prod_identifier: {
 			selector: '(//div[text()="Produces"])[1]/../div[2]/div[1]/div[1]/div[text()="Identifier"]/../div[2]/div[1]/div[1]',
 			locateStrategy: 'xpath'
@@ -604,6 +612,12 @@ module.exports = {
 		},
 		assert_ff_status(value){
 			return this.assert.containsText('@ff_status', value);
+		},
+		assert_ff_subject(value){
+			return this.assert.containsText('@ff_subject', value);
+		},
+		assert_ff_application(value){
+			return this.assert.containsText('@ff_application', value);
 		},
 		assert_prod_identifier(value){
 			return this.assert.containsText('@prod_identifier', value);
