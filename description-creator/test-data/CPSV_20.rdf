@@ -9,6 +9,6 @@
   </rdf:Description>
   <rdf:Description rdf:nodeID="testbe">
     <rdf:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent"/>
-    <dcterms:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent/DoingBusiness/StartingBusiness"/>
+    <dcterms:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent/StartingBusiness"/>
   </rdf:Description>
 </rdf:RDF>
