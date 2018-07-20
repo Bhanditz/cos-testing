@@ -2,5 +2,17 @@
 	[
 		{"label": "username", "value": "test"},
 		{"label": "password", "value": "test"}
+	],
+	"publicorganization":
+	[
+		{"label": "identifier", "value": "mypo"},
+		{"label": "identifier2", "value": "mypo2"},
+		{"label": "name", "value": "mypo2"}
+	],
+	"publicservice":
+	[
+		{"label": "identifier", "value": "mypublicservice"},
+		{"label": "name", "value": "mypublicservice2"},
+		{"label": "description", "value": "mydescription"}
 	]
 }

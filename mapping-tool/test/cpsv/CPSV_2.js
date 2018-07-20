@@ -121,7 +121,7 @@ module.exports = {
 
 		browser
 			.acceptAlert()
-			.pause(4000);
+			.pause(6000);
 
 		edit
 			.assert_source_model_deleted(source_model.value)
